@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_id: 1
+  name: MyString
+  email: MyString
+
+two:
+  household_id: 1
+  name: MyString
+  email: MyString
