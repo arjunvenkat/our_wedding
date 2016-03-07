@@ -1,0 +1,22 @@
+<div class="jumbotron">
+  <%= image_tag 'hero2.jpg', width: "100%"%>
+  <div class="title">
+    <h1>Kriti and Arjun</h1>
+    <div class="home-date">June 11th <span class="bar"></span> Chicago</div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="choose-household-form">
+        <h2>RSVP and access event info with the form below</h2>
+        <%= form_tag(household_rsvps_path, method: :get) do %>
+          <%= select_tag :guest_id, options_from_collection_for_select(Guest.has_full_name, :id, :full_name), include_blank: true %>
+          <%= submit_tag "Submit", class: 'btn btn-primary' %>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>
+
+

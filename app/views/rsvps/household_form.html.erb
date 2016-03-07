@@ -30,7 +30,7 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-3 form-rsvp-status">
-                        <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["has not replied about", "not replied"], ["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
+                        <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["is undecided on", "not replied"], ["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
                       </div>
                       <div class="col-md-4 form-event-name">
                         <h4>the <%= rsvp.event.name %></h4>
@@ -38,6 +38,7 @@
                     </div>
                     <div class="row">
                       <div class="col-md-12">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nam illum dolor quod, id, ea repellendus similique debitis aspernatur commodi hic totam molestias, ipsa officiis ex accusamus. Esse, animi harum!</p>
                         <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
                       </div>
                     </div>
@@ -47,6 +48,9 @@
                       </div>
                     </div>
                   </div>
+                  <% unless rsvp == guest.rsvps.last %>
+                    <hr>
+                  <% end %>
                 <% end %>
               </div>
             </div>

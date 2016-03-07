@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
   resources :guests
   resources :housholds
+
+  root 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
