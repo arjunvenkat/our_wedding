@@ -26,32 +26,41 @@
                     </div>
                   </div>
                 </div>
-                <% guest.rsvps.each do |rsvp| %>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-md-3 col-sm-6 form-rsvp-status">
-                        <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
-                      </div>
-                      <div class="col-md-4 col-sm-6 form-event-name">
-                        <h4>the <%= rsvp.event.name %></h4>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nam illum dolor quod, id, ea repellendus similique debitis aspernatur commodi hic totam molestias, ipsa officiis ex accusamus. Esse, animi harum!</p>
-                        <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></h5>
-                      </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <%= select_tag "guest_#{guest.id}_status", options_for_select([["can attend at least one event", "attending"], ["cannot attend any events", "not attending"]], guest.status), class: 'form-control guest-status' %>
                     </div>
                   </div>
-                  <% unless rsvp == guest.rsvps.last %>
-                    <hr>
+                </div>
+                <div id="guest_<%= guest.id %>_rsvps">
+                  <% guest.rsvps.each do |rsvp| %>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3 col-sm-6 form-rsvp-status">
+                          <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
+                        </div>
+                        <div class="col-md-4 col-sm-6 form-event-name">
+                          <h4>the <%= rsvp.event.name %></h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nam illum dolor quod, id, ea repellendus similique debitis aspernatur commodi hic totam molestias, ipsa officiis ex accusamus. Esse, animi harum!</p>
+                          <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></h5>
+                        </div>
+                      </div>
+                    </div>
+                    <% unless rsvp == guest.rsvps.last %>
+                      <hr>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
           <% end %>
@@ -60,3 +69,29 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function(){
+    // Initial page setup
+    $('.guest-status').each(function(){
+      var status = $(this).val();
+      var guestId = $(this).attr("id").split("_")[1]
+      if (status == "attending") {
+        $("#guest_" + guestId + "_rsvps").show();
+      } else {
+        $("#guest_" + guestId + "_rsvps").hide();
+      }
+    })
+
+    // Toggle rsvps for each guest depending on their status
+    $('.guest-status').change(function(){
+      var status = $(this).val();
+      var guestId = $(this).attr("id").split("_")[1]
+      if (status == "attending") {
+        $("#guest_" + guestId + "_rsvps").show();
+      } else {
+        $("#guest_" + guestId + "_rsvps").hide();
+      }
+    });
+  });
+</script>

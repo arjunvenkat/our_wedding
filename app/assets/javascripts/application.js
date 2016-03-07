@@ -16,7 +16,6 @@
 //= require select2
 //= require placeholder
 //= require turbolinks
-//= require_tree .
 
 $(function(){
   $( "#guest_household_id" ).select2({

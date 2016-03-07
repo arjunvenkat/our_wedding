@@ -16,6 +16,7 @@ class RsvpsController < ApplicationController
       guest.salutation = params["guest_#{guest.id}_salutation"]
       guest.first = params["guest_#{guest.id}_first"]
       guest.last = params["guest_#{guest.id}_last"]
+      guest.status = params["guest_#{guest.id}_status"]
       guest.save
       guest.rsvps.each do |rsvp|
         rsvp.status = params["guest_#{rsvp.guest_id}_event_#{rsvp.event_id}_status"]
