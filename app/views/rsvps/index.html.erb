@@ -15,8 +15,8 @@
   <tbody>
     <% @rsvps.each do |rsvp| %>
       <tr>
-        <td><%= rsvp.guest_id %></td>
-        <td><%= rsvp.event_id %></td>
+        <td><%= rsvp.guest.full_name %></td>
+        <td><%= rsvp.event.name %></td>
         <td><%= rsvp.status %></td>
         <td><%= link_to 'Show', rsvp %></td>
         <td><%= link_to 'Edit', edit_rsvp_path(rsvp) %></td>

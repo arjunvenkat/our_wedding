@@ -1,6 +1,7 @@
 class Guest < ActiveRecord::Base
   belongs_to :household
-  has_many :rsvps
+  acts_as_list scope: :household
+  has_many :rsvps, -> { order(position: :asc) }
 
   def full_name
     return "#{first} #{last}"

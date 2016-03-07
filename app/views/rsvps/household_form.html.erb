@@ -49,13 +49,13 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nam illum dolor quod, id, ea repellendus similique debitis aspernatur commodi hic totam molestias, ipsa officiis ex accusamus. Esse, animi harum!</p>
+                          <p class="rsvp-event-desc"><%= rsvp.event.description %></p>
                           <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></h5>
+                          <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><a href="https://www.google.com/maps?q=<%= rsvp.event.address1.gsub(" ", "+") %>+<%= rsvp.event.address2.gsub(" ", "+") %>+<%= rsvp.event.city %>+<%= rsvp.event.state %>" target="_blank"><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></a></h5>
                         </div>
                       </div>
                     </div>
