@@ -62,8 +62,8 @@ puts "There are #{Event.count} events in the database"
 
 Rsvp.destroy_all
 r1 = Rsvp.create(guest_id: g1.id, event_id: e1.id, status: "yes")
-r2 = Rsvp.create(guest_id: g2.id, event_id: e1.id, status: "no")
-r3 = Rsvp.create(guest_id: g3.id, event_id: e1.id, status: "not replied")
-r4 = Rsvp.create(guest_id: g4.id, event_id: e1.id, status: "not replied")
+r2 = Rsvp.create(guest_id: g2.id, event_id: e1.id, status: "yes")
+r3 = Rsvp.create(guest_id: g3.id, event_id: e1.id, status: "yes")
+r4 = Rsvp.create(guest_id: g4.id, event_id: e1.id, status: "yes")
 r5 = Rsvp.create(guest_id: g1.id, event_id: e2.id, status: "yes")
 puts "There are #{Rsvp.count} rsvps in the database"

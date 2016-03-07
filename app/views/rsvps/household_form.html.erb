@@ -29,10 +29,10 @@
                 <% guest.rsvps.each do |rsvp| %>
                   <div class="form-group">
                     <div class="row">
-                      <div class="col-md-3 form-rsvp-status">
-                        <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["is undecided on", "not replied"], ["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
+                      <div class="col-md-3 col-sm-6 form-rsvp-status">
+                        <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
                       </div>
-                      <div class="col-md-4 form-event-name">
+                      <div class="col-md-4 col-sm-6 form-event-name">
                         <h4>the <%= rsvp.event.name %></h4>
                       </div>
                     </div>
