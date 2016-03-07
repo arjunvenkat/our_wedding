@@ -38,10 +38,10 @@
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-3 col-sm-6 form-rsvp-status">
-                          <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
+                          <%= select_tag "rsvp_#{rsvp.id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'rsvp-status form-control' %>
                         </div>
                         <div class="col-md-4 col-sm-6 form-event-name">
-                          <h4>the <%= rsvp.event.name %></h4>
+                          <h4>the <%= rsvp.event.name %> <i id="rsvp_<%= rsvp.id %>_indicator"></i></h4>
                         </div>
                       </div>
                       <div class="row">
@@ -83,6 +83,20 @@
       }
     })
 
+    $('.rsvp-status').each(function(){
+      var status = $(this).val();
+      var rsvpId = $(this).attr("id").split("_")[1]
+      console.log(rsvpId);
+      console.log(status);
+      if (status == "yes") {
+        $("#rsvp_" + rsvpId + "_indicator")
+          .addClass("fa fa-check");
+      } else {
+        $("#rsvp_" + rsvpId + "_indicator")
+          .addClass("fa fa-times");
+      }
+    });
+
     // Toggle rsvps for each guest depending on their status
     $('.guest-status').change(function(){
       var status = $(this).val();
@@ -91,6 +105,23 @@
         $("#guest_" + guestId + "_rsvps").show();
       } else {
         $("#guest_" + guestId + "_rsvps").hide();
+      }
+    });
+
+    // Toggle rsvp indicators depending on event attendance
+    $('.rsvp-status').change(function(){
+      var status = $(this).val();
+      var rsvpId = $(this).attr("id").split("_")[1]
+      console.log(rsvpId);
+      console.log(status);
+      if (status == "yes") {
+        $("#rsvp_" + rsvpId + "_indicator")
+          .addClass("fa-check")
+          .removeClass("fa-times");
+      } else {
+        $("#rsvp_" + rsvpId + "_indicator")
+          .addClass("fa-times")
+          .removeClass("fa-check");
       }
     });
   });
