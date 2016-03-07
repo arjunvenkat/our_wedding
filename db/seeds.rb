@@ -50,7 +50,7 @@ e1 = Event.create(
       state: "IL",
       zip: "60516")
 e2 = Event.create(
-      name: "Ceremony",
+      name: "Wedding Ceremony",
       description: "This is where the wedding happens",
       datetime: DateTime.strptime("06/11/2016 10:30", "%m/%d/%Y %H:%M"),
       address1: "The Westin Chicago Northwest",
