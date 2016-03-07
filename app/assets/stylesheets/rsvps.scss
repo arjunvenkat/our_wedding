@@ -1,3 +1,41 @@
 // Place all the styles related to the rsvps controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.rsvp-form {
+  h1 {
+    font-size: 42px;
+  }
+}
+
+.form-event-name h4 {
+  line-height: 56px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.form-rsvp-status select {
+  font-size: 24px;
+  line-height: 37px;
+  height: 56px;
+}
+
+.guest-name input.form-control {
+  font-size: 32px;
+  height: 2em;
+}
+
+.rsvp-date-time {
+  margin-bottom: 0;
+}
+.rsvp-address {
+  margin-top: 0;
+}
+
+.rsvp-date-time, .rsvp-address {
+  line-height: 1.4;
+  small {
+    color: gray;
+  }
+}

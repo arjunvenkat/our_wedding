@@ -1,0 +1,58 @@
+<div class="rsvp-form">
+  <h1>Event RSVPs for the <%= @household.name %> household</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <div class="row form-group">
+        <div class="col-md-8">
+          <a class="select-every btn btn-success" href="#">We can attend all of the events!</a>
+          <a class="select-nobody btn btn-danger" href="#">We are unable to attend any events <i class="fa fa-frown-o"></i></a>
+        </div>
+      </div> -->
+      <%= form_tag(household_rsvps_path) do %>
+        <%= hidden_field_tag :household_id, @household.id %>
+          <% @household.guests.each do |guest| %>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <div class="row guest-name">
+                    <div class="col-md-1">
+                      <%= text_field_tag "guest_#{guest.id}_salutation", guest.salutation, placeholder: 'Title', class: 'form-control'  %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= text_field_tag "guest_#{guest.id}_first", guest.first, placeholder: 'First name', class: 'form-control'  %>
+                    </div>
+                    <div class="col-md-4">
+                      <%= text_field_tag "guest_#{guest.id}_last", guest.last, placeholder: 'Last name', class: 'form-control'  %>
+                    </div>
+                  </div>
+                </div>
+                <% guest.rsvps.each do |rsvp| %>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 form-rsvp-status">
+                        <%= select_tag "guest_#{guest.id}_event_#{rsvp.event_id}_status", options_for_select([["has not replied about", "not replied"], ["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'form-control' %>
+                      </div>
+                      <div class="col-md-4 form-event-name">
+                        <h4>the <%= rsvp.event.name %></h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></h5>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <%= submit_tag 'submit', class: 'btn btn-default btn-lg' %>
+      <% end %>
+    </div>
+  </div>
+</div>

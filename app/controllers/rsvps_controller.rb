@@ -5,9 +5,25 @@ class RsvpsController < ApplicationController
 
   end
 
-  def household
-    @selected_guest = Guest.find(params[:guest_id])
-    @household = Household.find_by(id: @selected_guest.household_id )
+  def household_form
+    selected_guest = Guest.find(params[:guest_id])
+    @household = Household.find_by(id: selected_guest.household_id )
+  end
+
+  def household_submission
+    @household = Household.find(params[:household_id])
+    @household.guests.each do |guest|
+      guest.salutation = params["guest_#{guest.id}_salutation"]
+      guest.first = params["guest_#{guest.id}_first"]
+      guest.last = params["guest_#{guest.id}_last"]
+      guest.save
+      guest.rsvps.each do |rsvp|
+        rsvp.status = params["guest_#{rsvp.guest_id}_event_#{rsvp.event_id}_status"]
+        rsvp.save
+      end
+    end
+
+    redirect_to "/rsvps/household?guest_id=#{@household.rsvps.last.guest.id}", notice: "Your RSVP has been updated"
   end
 
 

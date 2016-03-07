@@ -2,8 +2,10 @@ source 'https://rubygems.org'
 
 gem 'select2-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootswatch-rails'
 gem 'pg'
 gem "placeholder-gem"
+gem "font-awesome-rails"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'

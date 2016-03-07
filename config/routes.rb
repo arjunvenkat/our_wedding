@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :households
   resources :rsvps do
     get 'choose_household' => 'rsvps#choose_household', on: :collection
-    get 'household' => 'rsvps#household', on: :collection
+    get 'household' => 'rsvps#household_form', on: :collection
+    post 'household' => 'rsvps#household_submission', on: :collection
   end
   resources :guests
   resources :housholds
