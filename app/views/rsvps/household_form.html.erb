@@ -26,9 +26,9 @@
                     </div>
                   </div>
                 </div>
+
               </div>
               <div class="panel-body">
-
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-6">
@@ -36,32 +36,35 @@
                     </div>
                   </div>
                 </div>
+
                 <div id="guest_<%= guest.id %>_rsvps">
                   <% guest.rsvps.each do |rsvp| %>
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-3 col-sm-6 form-rsvp-status">
-                          <%= select_tag "rsvp_#{rsvp.id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'rsvp-status form-control' %>
+                    <div class="rsvp">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-3 col-sm-6 form-rsvp-status">
+                            <%= select_tag "rsvp_#{rsvp.id}_status", options_for_select([["is attending", "yes"], ["is not attending", "no"]], rsvp.status), class: 'rsvp-status form-control' %>
+                          </div>
+                          <div class="col-md-4 col-sm-6 form-event-name">
+                            <h4>the <%= rsvp.event.name %> <i id="rsvp_<%= rsvp.id %>_indicator"></i></h4>
+                          </div>
                         </div>
-                        <div class="col-md-4 col-sm-6 form-event-name">
-                          <h4>the <%= rsvp.event.name %> <i id="rsvp_<%= rsvp.id %>_indicator"></i></h4>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <p class="rsvp-event-desc"><%= rsvp.event.description %></p>
+                            <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><a href="https://www.google.com/maps?q=<%= rsvp.event.address1.gsub(" ", "+") %>+<%= rsvp.event.address2.gsub(" ", "+") %>+<%= rsvp.event.city %>+<%= rsvp.event.state %>" target="_blank"><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></a></h5>
+                          </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <p class="rsvp-event-desc"><%= rsvp.event.description %></p>
-                          <h5 class="rsvp-date-time"><%= rsvp.event.datetime.strftime("%A, %B #{rsvp.event.datetime.day.ordinalize}") %> <small>at</small> <%= rsvp.event.datetime.strftime("%l:%M %p") %></h5>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <h5 class="rsvp-address"><%= rsvp.event.address1 %> <small><a href="https://www.google.com/maps?q=<%= rsvp.event.address1.gsub(" ", "+") %>+<%= rsvp.event.address2.gsub(" ", "+") %>+<%= rsvp.event.city %>+<%= rsvp.event.state %>" target="_blank"><%= rsvp.event.address2 %>, <%= rsvp.event.city %> <%= rsvp.event.state %></small></a></h5>
-                        </div>
-                      </div>
+                      <% unless rsvp == guest.rsvps.last %>
+                        <hr>
+                      <% end %>
                     </div>
-                    <% unless rsvp == guest.rsvps.last %>
-                      <hr>
-                    <% end %>
                   <% end %>
                 </div>
               </div>

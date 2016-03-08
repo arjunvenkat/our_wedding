@@ -10,9 +10,10 @@
     <div class="col-md-12">
       <div class="choose-household-form">
         <h2>RSVP and access event info with the form below</h2>
+        <h3>Search using your name or the name of someone in your household</h3>
         <%= form_tag(household_rsvps_path, method: :get) do %>
           <%= select_tag :guest_id, options_from_collection_for_select(Guest.has_full_name, :id, :full_name), include_blank: true %>
-          <%= submit_tag "Submit", class: 'btn btn-primary' %>
+          <%= submit_tag "Search for household", class: 'btn btn-primary' %>
         <% end -%>
       </div>
     </div>
