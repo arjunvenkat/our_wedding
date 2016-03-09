@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   resources :events
-  resources :households
+  resources :households do
+    get 'rsvp_form' => 'households#rsvp_form', on: :collection
+    post 'rsvp' => 'households#rsvp_submission', on: :member
+    get 'rsvp' => 'households#rsvp_status', on: :member, as: 'rsvp_status'
+  end
   resources :rsvps do
-    get 'choose_household' => 'rsvps#choose_household', on: :collection
-    get 'household' => 'rsvps#household_form', on: :collection
     post 'household' => 'rsvps#household_submission', on: :collection
   end
   resources :guests

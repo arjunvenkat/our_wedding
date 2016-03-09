@@ -1,5 +1,30 @@
 class HouseholdsController < ApplicationController
-  before_action :set_household, only: [:show, :edit, :update, :destroy]
+  before_action :set_household, only: [:show, :edit, :update, :destroy, :rsvp_submission, :rsvp_status]
+
+  def rsvp_form
+    selected_guest = Guest.find(params[:guest_id])
+    @household = Household.find_by(id: selected_guest.household_id )
+  end
+
+  def rsvp_submission
+    @household.guests.each do |guest|
+      guest.salutation = params["guest_#{guest.id}_salutation"]
+      guest.first = params["guest_#{guest.id}_first"]
+      guest.last = params["guest_#{guest.id}_last"]
+      guest.status = params["guest_#{guest.id}_status"]
+      guest.save
+      guest.rsvps.each do |rsvp|
+        rsvp.status = params["rsvp_#{rsvp.id}_status"]
+        rsvp.save
+      end
+    end
+    RsvpMailer.update(@household).deliver_now
+    redirect_to rsvp_status_household_path(@household.id), notice: "Your RSVP has been updated"
+  end
+
+  def rsvp_status
+
+  end
 
   # GET /households
   # GET /households.json

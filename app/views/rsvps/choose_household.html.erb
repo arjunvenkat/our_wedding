@@ -1,6 +1,0 @@
-<h1>RSVP for Arjun and Kriti's wedding</h1>
-<%= form_tag(household_rsvps_path, method: :get) do %>
-  <%= select_tag :guest_id, options_from_collection_for_select(Guest.has_full_name, :id, :full_name), include_blank: true %>
-  <%= submit_tag "Submit", class: 'btn btn-primary' %>
-<% end -%>
-

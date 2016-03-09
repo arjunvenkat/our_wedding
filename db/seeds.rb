@@ -27,7 +27,7 @@ g2 = Guest.create(
       last: "Venkataswamy",
       email: "svenkat45@gmail.com",
       position: 2,
-      household_id: h1.id)
+      household_id: h2.id)
 g3 = Guest.create(
       salutation: "Ms.",
       first: "Kriti",
