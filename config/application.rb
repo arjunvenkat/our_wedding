@@ -15,7 +15,6 @@ module OurWedding
       domain:               'example.com',
       user_name:            'arjun@lorislearning.com',
       password:             'test',
-      # password:             'oCCamsla7er12',
       authentication:       'plain',
       enable_starttls_auto: true  }
     # Settings in config/environments/* take precedence over those specified here.
