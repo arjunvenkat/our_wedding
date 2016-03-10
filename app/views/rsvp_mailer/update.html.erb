@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <p>Your RSVP to Kriti and Arjun's wedding has been updated. Here's what we've got:</p>
+<p>Your RSVP to Kriti and Arjun's wedding has been updated. Here's what we've got:</p>
 
-    <% @household.guests.each do |guest| %>
-      <h2><%= guest.full_name %>...</h2>
-      <ul>
-        <% guest.rsvps.each do |rsvp| %>
-          <li><%= rsvp.readable_status %> the <%= rsvp.event.name %></li>
-        <% end %>
-      </ul>
-    <% end %>
+<% @household.guests.each do |guest| %>
+<h2><%= guest.full_name %>...</h2>
+<ul>
+  <% guest.rsvps.each do |rsvp| %>
+  <li><%= rsvp.readable_status %> the <%= rsvp.event.name %></li>
+  <% end %>
+</ul>
+<% end %>
 
-    <div>Let us know if you have any questions!</div>
-    <div>Kriti and Arjun</div>
-  </body>
-</html>
+<p><a href="http://www.kritiandarjun.com/households/<%= @household.id %>/rsvp">View your RSVP status on the website</a></p>
+
+<div>Let us know if you have any questions!</div>
+<div>Kriti and Arjun</div>
+
 

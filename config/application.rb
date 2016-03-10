@@ -12,9 +12,8 @@ module OurWedding
     config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       port:                 587,
-      domain:               'example.com',
-      user_name:            'arjun@lorislearning.com',
-      password:             'test',
+      user_name:            ENV['email_username'],
+      password:             ENV['email_password'],
       authentication:       'plain',
       enable_starttls_auto: true  }
     # Settings in config/environments/* take precedence over those specified here.

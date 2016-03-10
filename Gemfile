@@ -7,7 +7,8 @@ gem 'pg'
 gem "placeholder-gem"
 gem "font-awesome-rails"
 gem "acts_as_list"
-
+gem 'figaro'
+gem 'sendgrid-ruby'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
