@@ -11,6 +11,7 @@ Household.destroy_all
 h1 = Household.create(name: "Venkataswamy")
 h2 = Household.create(name: "Goel")
 h3 = Household.create(name: "Dodia")
+h4 = Household.create(name: "Bhaskar")
 puts "There are #{Household.count} households in the database"
 
 Guest.destroy_all
@@ -46,9 +47,16 @@ g5 = Guest.create(
       salutation: "Dr.",
       first: "Neal",
       last: "Dodia",
-      email: "",
+      email: "ndodia2@gmail.com",
       position: 1,
       household_id: h3.id)
+g6 = Guest.create(
+      salutation: "Mr.",
+      first: "Samarth",
+      last: "Bhaskar",
+      email: "samarth.bhaskar@gmail.com",
+      position: 1,
+      household_id: h4.id)
 puts "There are #{Guest.count} guests in the database"
 
 Event.destroy_all
@@ -108,4 +116,8 @@ Rsvp.create(guest_id: g5.id, event_id: e1.id, status: "yes")
 Rsvp.create(guest_id: g5.id, event_id: e2.id, status: "yes")
 Rsvp.create(guest_id: g5.id, event_id: e3.id, status: "yes")
 Rsvp.create(guest_id: g5.id, event_id: e4.id, status: "yes")
+Rsvp.create(guest_id: g6.id, event_id: e1.id, status: "yes")
+Rsvp.create(guest_id: g6.id, event_id: e2.id, status: "yes")
+Rsvp.create(guest_id: g6.id, event_id: e3.id, status: "yes")
+Rsvp.create(guest_id: g6.id, event_id: e4.id, status: "yes")
 puts "There are #{Rsvp.count} rsvps in the database"
