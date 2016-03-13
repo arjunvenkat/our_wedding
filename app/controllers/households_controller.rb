@@ -19,6 +19,7 @@ class HouseholdsController < ApplicationController
         rsvp.save
       end
     end
+
     html = "<p>Your RSVP to Kriti and Arjun's wedding has been updated. Here's what we've got:</p>"
     @household.guests.each do |guest|
       html << "<div><strong>#{guest.full_name}...</strong></div>"
@@ -29,23 +30,24 @@ class HouseholdsController < ApplicationController
       html << "</ul>"
     end
     html << "<p><a href='http://www.kritiandarjun.com/households/#{@household.id }/rsvp'>View your RSVP status on the website</a></p>"
-    html << "<div>Let us know if you have any questions!</div>"
+    html << "<div>If you have any questions, please email Arjun at <a href='mailto:avenkat2@gmail.com'>avenkat2@gmail.com</a>.</div>"
     html << "<div>Kriti and Arjun</div>"
-
     text = "Your RSVP for Kriti and Arjun's wedding has been updated.\n View your RSVP at http://kritiandarjun.com/households/#{@household.id}/rsvp"
 
     client = SendGrid::Client.new(api_key: ENV["sendgrid_api_key"])
-    mail = SendGrid::Mail.new do |m|
-      m.to = 'avenkat2@gmail.com'
-      m.from = 'noreply@arjunandkriti.com'
-      m.subject = "Updated RSVP for Kriti and Arjun's wedding"
-      m.text = text
-      m.html = html
+    @household.guests.each do |guest|
+      if guest.email.present?
+        mail = SendGrid::Mail.new do |m|
+          m.to = guest.email
+          m.from = 'noreply@arjunandkriti.com'
+          m.subject = "Updated RSVP for Kriti and Arjun's wedding"
+          m.text = text
+          m.html = html
+        end
+        res = client.send(mail)
+        puts res.inspect
+      end
     end
-    res = client.send(mail)
-    puts res
-
-    # RsvpMailer.update(@household).deliver_now
     redirect_to rsvp_status_household_path(@household.id), notice: "Your RSVP has been updated"
   end
 
