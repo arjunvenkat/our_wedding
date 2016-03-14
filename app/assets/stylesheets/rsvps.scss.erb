@@ -10,6 +10,17 @@
   h1 {
     font-size: 42px;
   }
+  .image-heading {
+    background-size: cover;
+    background-position: 0% 40%;
+    background-image: url("<%= asset_path('kritiarjun3.jpg') %>");
+  }
+}
+
+.rsvp-status {
+  .image-heading {
+     background-image: url("<%= asset_path('kritiarjun2.jpg') %>");
+  }
 }
 
 .form-event-name h4 {
@@ -60,4 +71,30 @@
   h2 {
     font-size: 2.4em;
   }
+}
+
+.event {
+  margin-bottom: 48px;
+  .event-title {
+    position: relative;
+    background-image: url('<%= asset_path("fruits.jpg") %>');
+    background-size: cover;
+    background-position: 0% 25%;
+  }
+  .screen {
+    padding: 24px;
+    background-color: rgba(0,0,0,0.7)
+  }
+  h6 {
+    margin-bottom: 0;
+    font-weight: bold;
+  }
+  ul {
+    padding-left: 0;
+  }
+
+  // &.sangeet .event-title {
+  //   background-image: url('<%= asset_path("sangeet.jpg") %>');
+  // }
+
 }

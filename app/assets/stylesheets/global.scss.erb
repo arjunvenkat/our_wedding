@@ -12,16 +12,20 @@ footer {
   padding-top: 4em;
 }
 
+.screen {
+  background-color: rgba(0,0,0,0.6);
+  min-height: 100%;
+  color: white;
+}
+
+
 .image-heading {
   margin-bottom: 48px;
 
   background-image: url("<%= asset_path('westin2.jpg') %>");
   .screen {
-    background-color: rgba(0,0,0,0.7);
-    min-height: 100%;
     padding-top: 48px;
     padding-bottom: 48px;
-    color: white;
     text-align: center;
   }
   h1 {
@@ -31,7 +35,7 @@ footer {
     text-align: center;
     color: white;
   }
-  h5 {
+  h1, h3, h4, h5 {
     color: white;
   }
   p {
