@@ -6,7 +6,7 @@
   </div>
 </div>
 <div class="container">
-  <div class="row">
+  <div class="row" id="rsvp">
     <div class="col-md-12">
       <div class="choose-household-form">
         <h2>Access event info and submit your RSVP with the form below</h2>
@@ -19,5 +19,27 @@
     </div>
   </div>
 </div>
+<div class="image-heading" id="accomodations">
+  <div class="screen">
+    <div class="container">
+      <h2>Accomodations</h2>
+      <%= render 'address', event: Event.find_by_name("Wedding Ceremony") %>
+      <p>The ceremony and reception will take place here. We have reserved a block of rooms under the name "Goel Wedding"</p>
+    </div>
+  </div>
+</div>
 
 
+<script>
+  $(function(){
+    $( "#guest_household_id" ).select2({
+        placeholder: "The Goels",
+        theme: "bootstrap"
+    });
+
+    $( "#guest_id" ).select2({
+        placeholder: "Select any member of your household",
+        theme: "bootstrap"
+    });
+  });
+</script>

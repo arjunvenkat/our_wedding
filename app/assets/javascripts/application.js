@@ -11,22 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= requre jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require select2
 //= require placeholder
 //= require turbolinks
 
-$(function(){
-  $( "#guest_household_id" ).select2({
-      placeholder: "The Goels",
-      theme: "bootstrap"
-  });
 
-  $( "#guest_id" ).select2({
-      placeholder: "Select any member of your household",
-      theme: "bootstrap"
-  });
-});
 
 

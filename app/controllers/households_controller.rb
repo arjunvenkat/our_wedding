@@ -4,7 +4,7 @@ class HouseholdsController < ApplicationController
   def rsvp_form
     selected_guest = Guest.find(params[:guest_id])
     @household = Household.find_by(id: selected_guest.household_id )
-
+    render layout: 'home_layout'
   end
 
   def rsvp_submission
@@ -52,7 +52,13 @@ class HouseholdsController < ApplicationController
   end
 
   def rsvp_status
+    session[:household_id] = @household.id
+    render layout: 'home_layout'
+  end
 
+  def logout
+    reset_session
+    redirect_to root_url
   end
 
   # GET /households

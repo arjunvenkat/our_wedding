@@ -8,3 +8,11 @@
   position: relative;
   background: none;
 }
+
+.navbar {
+  margin-bottom: 0;
+  .navbar-brand {
+    font-family: 'Alice', serif;
+    font-weight: bold;
+  }
+}

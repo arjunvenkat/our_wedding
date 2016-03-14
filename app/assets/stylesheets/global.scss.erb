@@ -1,0 +1,56 @@
+html, body {
+  height: 100%;
+}
+
+footer {
+  margin-top: 4em;
+  margin-bottom: 4em;
+  text-align: center;
+}
+
+.spacer {
+  padding-top: 4em;
+}
+
+.image-heading {
+  margin-bottom: 48px;
+
+  background-image: url("<%= asset_path('westin2.jpg') %>");
+  .screen {
+    background-color: rgba(0,0,0,0.7);
+    min-height: 100%;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    color: white;
+    text-align: center;
+  }
+  h1 {
+    color: white;
+  }
+  h2 {
+    text-align: center;
+    color: white;
+  }
+  h5 {
+    color: white;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+
+h1,h2 {
+  font-family: Alice, 'serif';
+  font-weight: bold;
+}
+
+@media (min-width: $screen-md-min) {
+
+  .image-heading {
+    h2 {
+      font-size: 4em;
+    }
+  }
+
+}
+

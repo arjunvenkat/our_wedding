@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'select2-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
+gem 'jquery-turbolinks'
 gem 'pg'
 gem "placeholder-gem"
 gem "font-awesome-rails"

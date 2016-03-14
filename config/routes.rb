@@ -4,14 +4,14 @@ Rails.application.routes.draw do
     get 'rsvp_form' => 'households#rsvp_form', on: :collection
     post 'rsvp' => 'households#rsvp_submission', on: :member
     get 'rsvp' => 'households#rsvp_status', on: :member, as: 'rsvp_status'
+    delete 'logout' => 'households#logout', on: :member
   end
   resources :rsvps do
     post 'household' => 'rsvps#household_submission', on: :collection
   end
   resources :guests
-  resources :housholds
-
   root 'pages#home'
+  get '/hotel-info' => 'pages#hotel_info'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
