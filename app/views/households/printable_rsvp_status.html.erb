@@ -1,7 +1,19 @@
+  <style>
+    h4, h6 {
+      margin: 0;
+    }
+    ul {
+      padding-left: 0;
+    }
+    li {
+      list-style-type: none;
+    }
+
+  </style>
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <%= link_to "View print-friendly version", printable_rsvp_status_household_path(@household)  %> |
-      <%= link_to "View normal version", rsvp_status_household_path(@household)  %>
+      <%= link_to "View print-friendly version", printable_rsvp_status_household_path(@household, @household.unique_hex)  %> |
+      <%= link_to "View normal version", rsvp_status_household_path(@household, @household.unique_hex)  %>
       <% Event.all.each do |event| %>
       <% if event.rsvps_for_household(@household).present? %>
       <div>

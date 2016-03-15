@@ -2,9 +2,10 @@
   <div class="image-heading">
     <div class="screen main-screen">
       <div class="container">
-        <h1>Checking names for the <%= @household.name %> household</h1>
+        <h1>Check names for the <%= @household.name %> household</h1>
+        <h4>Step 1 of 2</h4>
         <h4>Please fix any spelling mistakes you might see</h4>
-        <h5><%= link_to "edit attendance", rsvp_form_household_path(@household) %> | <%= link_to "view RSVP status", rsvp_status_household_path(@household) %></h5>
+        <h5><%= link_to "edit attendance", rsvp_form_household_path(@household, @household.unique_hex) %> | <%= link_to "view RSVP status", rsvp_status_household_path(@household, @household.unique_hex) %></h5>
       </div>
     </div>
   </div>

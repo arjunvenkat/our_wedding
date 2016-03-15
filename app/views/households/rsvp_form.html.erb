@@ -3,10 +3,11 @@
     <div class="screen main-screen">
       <div class="container">
         <h1>Event RSVPs for the <%= @household.name %> household</h1>
+        <h4>Step 2 of 2</h4>
         <h4>Please submit your RSVP by May 1<sup>st</sup></h4>
         <h5>
-          <%= link_to "edit names", check_names_household_path(@household) %> |
-          <%= link_to "view RSVP status", rsvp_status_household_path(@household) %>
+          <%= link_to "edit names", check_names_household_path(@household, @household.unique_hex) %> |
+          <%= link_to "view RSVP status", rsvp_status_household_path(@household, @household.unique_hex) %>
         </h5>
       </div>
     </div>

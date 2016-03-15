@@ -6,9 +6,9 @@ class HouseholdsController < ApplicationController
     if selected_guest
       household = Household.find_by(id: selected_guest.household_id )
       if current_household && current_household.guests.include?(selected_guest)
-        redirect_to rsvp_status_household_path(current_household)
+        redirect_to rsvp_status_household_path(current_household, current_household.unique_hex)
       else
-        redirect_to check_names_household_path(household.id)
+        redirect_to check_names_household_path(household.id, household.unique_hex)
       end
     else
       redirect_to root_url, alert: 'Please submit a valid name for your RSVP'
@@ -26,7 +26,7 @@ class HouseholdsController < ApplicationController
       guest.last = params["guest_#{guest.id}_last"]
       guest.save
     end
-    redirect_to rsvp_form_household_path(@household.id), notice: "The names on your RSVP have been updated"
+    redirect_to rsvp_form_household_path(@household.id, @household.unique_hex), notice: "The names on your RSVP have been updated"
   end
 
   def rsvp_form
@@ -69,7 +69,7 @@ class HouseholdsController < ApplicationController
         puts res.inspect
       end
     end
-    redirect_to rsvp_status_household_path(@household.id), notice: "Your RSVP has been updated"
+    redirect_to rsvp_status_household_path(@household.id, @household.unique_hex), notice: "Your RSVP has been updated"
   end
 
   def rsvp_status

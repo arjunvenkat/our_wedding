@@ -12,6 +12,15 @@ h1 = Household.create(name: "Venkataswamy")
 h2 = Household.create(name: "Goel")
 h3 = Household.create(name: "Dodia")
 h4 = Household.create(name: "Bhaskar")
+Household.all.each do |household|
+      hex = ""
+      loop do
+        hex = SecureRandom.hex(6)
+        break if Household.find_by(unique_hex: hex).blank?
+      end
+      household.unique_hex = hex
+      household.save
+end
 puts "There are #{Household.count} households in the database"
 
 Guest.destroy_all

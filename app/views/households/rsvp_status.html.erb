@@ -2,17 +2,17 @@
   <div class="image-heading">
     <div class="screen main-screen">
       <div class="container">
-      <h1>Event RSVPs for the <%= @household.name %> household</h1>
-        <p>You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards, please email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a></p>
-      <h5><%= link_to "edit attendance", rsvp_form_household_path(@household) %> | <%= link_to "edit names", check_names_household_path(@household) %></h5>
+      <h1>RSVP status and event info for the <%= @household.name %> household</h1>
+      <p class="half-width-info">You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards, please email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a></p>
+      <h5><%= link_to "edit attendance", rsvp_form_household_path(@household, @household.unique_hex) %> | <%= link_to "edit names", check_names_household_path(@household, @household.unique_hex) %></h5>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-        <%= link_to "View print-friendly version", printable_rsvp_status_household_path(@household)  %> |
-        <%= link_to "View normal version", rsvp_status_household_path(@household)  %>
+        <%= link_to "View print-friendly version", printable_rsvp_status_household_path(@household, @household.unique_hex)  %> |
+        <%= link_to "View normal version", rsvp_status_household_path(@household, @household.unique_hex)  %>
         <% Event.all.each do |event| %>
         <% if event.rsvps_for_household(@household).present? %>
         <div class="event <%= event.name.downcase.gsub(" ", "-") %>">

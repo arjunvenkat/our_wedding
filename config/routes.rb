@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   resources :events
   resources :households do
     get 'route_rsvp' => 'households#route_rsvp', on: :collection
-    get 'check_names' => 'households#check_names', on: :member
+    get 'check_names/:unique_hex' => 'households#check_names', on: :member, as: 'check_names'
     post 'update_names' => 'households#update_names', on: :member
-    get 'rsvp_form' => 'households#rsvp_form', on: :member
+    get 'rsvp_form/:unique_hex' => 'households#rsvp_form', on: :member, as: 'rsvp_form'
     post 'rsvp' => 'households#rsvp_submission', on: :member
-    get 'rsvp' => 'households#rsvp_status', on: :member, as: 'rsvp_status'
-    get 'printable_rsvp' => 'households#printable_rsvp_status', on: :member, as: 'printable_rsvp_status'
+    get 'rsvp/:unique_hex' => 'households#rsvp_status', on: :member, as: 'rsvp_status'
+    get 'printable_rsvp/:unique_hex' => 'households#printable_rsvp_status', on: :member, as: 'printable_rsvp_status'
     delete 'logout' => 'households#logout', on: :member
   end
   resources :rsvps do
