@@ -35,14 +35,14 @@ g2 = Guest.create(
       salutation: "Mr.",
       first: "Suman",
       last: "Venkataswamy",
-      email: "svenkat45@gmail.com",
+      email: "",
       position: 2,
       household_id: h2.id)
 g3 = Guest.create(
       salutation: "Ms.",
       first: "Kriti",
       last: "Goel",
-      email: "kgoel18@gmail.com",
+      email: "",
       position: 1,
       household_id: h2.id)
 g4 = Guest.create(

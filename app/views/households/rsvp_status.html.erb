@@ -2,8 +2,8 @@
   <div class="image-heading">
     <div class="screen main-screen">
       <div class="container">
-      <h1>RSVP status and event info for the <%= @household.name %> household</h1>
-      <p class="half-width-info">You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards, please email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a></p>
+      <h1>RSVP status for the <%= @household.name %> household</h1>
+      <h5 class="half-width-info">You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards, please email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a></h5>
       <h5><%= link_to "edit attendance", rsvp_form_household_path(@household, @household.unique_hex) %> | <%= link_to "edit names", check_names_household_path(@household, @household.unique_hex) %></h5>
       </div>
     </div>
