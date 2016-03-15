@@ -11,7 +11,7 @@
       <div class="choose-household-form">
         <h2>Find your RSVP and access event info with the form below</h2>
         <h3>Search using your name or the name of someone in your household. Please submit your RSVP by May 1<sup>st</sup>.</h3>
-        <%= form_tag(rsvp_form_households_path, method: :get) do %>
+        <%= form_tag(route_rsvp_households_path, method: :get) do %>
           <%= select_tag :guest_id, options_from_collection_for_select(Guest.has_full_name, :id, :full_name), include_blank: true %>
           <%= submit_tag "Search for household", class: 'btn btn-primary' %>
         <% end -%>
@@ -20,7 +20,7 @@
   </div>
 </div>
 <div class="image-heading" id="accomodations">
-  <div class="screen">
+  <div class="screen sub-screen">
     <div class="container">
       <h2>Accomodations</h2>
       <%= render 'address', event: Event.find_by_name("Wedding Ceremony") %>

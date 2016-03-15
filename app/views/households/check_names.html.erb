@@ -1,0 +1,39 @@
+<div class="check-names">
+  <div class="image-heading">
+    <div class="screen main-screen">
+      <div class="container">
+        <h1>Checking names for the <%= @household.name %> household</h1>
+        <h4>Please fix any spelling mistakes you might see</h4>
+        <h5><%= link_to "edit attendance", rsvp_form_household_path(@household) %> | <%= link_to "view RSVP status", rsvp_status_household_path(@household) %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <%= form_tag(update_names_household_path(@household)) do %>
+        <% @household.guests.each_with_index do |guest, index| %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-1"><div class="list-num"><%= index + 1 %></div></div>
+              <div class="col-sm-1">
+                <%= text_field_tag "guest_#{guest.id}_salutation", guest.salutation, placeholder: 'Title', class: 'form-control'  %>
+              </div>
+
+              <div class="col-sm-5">
+                <%= text_field_tag "guest_#{guest.id}_first", guest.first, placeholder: 'First name', class: 'form-control'  %>
+              </div>
+              <div class="col-sm-5">
+                <%= text_field_tag "guest_#{guest.id}_last", guest.last, placeholder: 'Last name', class: 'form-control'  %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= submit_tag "The names look correct", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

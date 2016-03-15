@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   resources :events
   resources :households do
-    get 'rsvp_form' => 'households#rsvp_form', on: :collection
+    get 'route_rsvp' => 'households#route_rsvp', on: :collection
+    get 'check_names' => 'households#check_names', on: :member
+    post 'update_names' => 'households#update_names', on: :member
+    get 'rsvp_form' => 'households#rsvp_form', on: :member
     post 'rsvp' => 'households#rsvp_submission', on: :member
     get 'rsvp' => 'households#rsvp_status', on: :member, as: 'rsvp_status'
+    get 'printable_rsvp' => 'households#printable_rsvp_status', on: :member, as: 'printable_rsvp_status'
     delete 'logout' => 'households#logout', on: :member
   end
   resources :rsvps do

@@ -6,14 +6,28 @@
   margin-bottom: 2em;
 }
 
-.rsvp-form {
+.rsvp-form, .rsvp-status, .check-names {
   h1 {
     font-size: 42px;
   }
-  .image-heading {
+  h2 {
+    font-size: 2.4em;
+  }
+}
+
+.image-heading {
     background-size: cover;
     background-position: 0% 40%;
+}
+
+.rsvp-form {
+  .image-heading {
     background-image: url("<%= asset_path('kritiarjun3.jpg') %>");
+    background-position: 0% 50%;
+  }
+  .guest-name {
+    line-height: 1.5;
+    font-size: 16px;
   }
 }
 
@@ -21,7 +35,23 @@
   .image-heading {
      background-image: url("<%= asset_path('kritiarjun2.jpg') %>");
   }
+  h1 {
+    margin-bottom: 0.3em;
+  }
+  p {
+    font-size: 1.2em;
+  }
 }
+
+.check-names{
+  .image-heading {
+     background-image: url("<%= asset_path('kritiarjun2.jpg') %>");
+     background-size: cover;
+     background-position: 0% 40%;
+  }
+}
+
+
 
 .form-event-name h4 {
   line-height: 56px;
@@ -61,17 +91,6 @@
 }
 
 
-.rsvp-status {
-  h1 {
-    margin-bottom: 0.3em;
-  }
-  p {
-    font-size: 1.2em;
-  }
-  h2 {
-    font-size: 2.4em;
-  }
-}
 
 .event {
   border-bottom: 1px solid lightgray;
@@ -88,6 +107,9 @@
   }
   ul {
     padding-left: 0;
+    li {
+      list-style-type: none;
+    }
   }
   .screen {
     background-color: rgba(0,0,0,0);
@@ -96,6 +118,14 @@
 
 }
 
+
+.attending {
+  color: green;
+}
+
+.not-attending {
+  color: red;
+}
 
 @media (min-width: $screen-xs-min) {
   .event {
@@ -108,7 +138,7 @@
     }
     .screen {
       padding: 24px;
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(0,0,0,0.6);
       color: white;
     }
   }

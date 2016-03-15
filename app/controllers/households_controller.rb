@@ -1,19 +1,40 @@
 class HouseholdsController < ApplicationController
-  before_action :set_household, only: [:show, :edit, :update, :destroy, :rsvp_submission, :rsvp_status]
+  before_action :set_household, only: [:show, :edit, :update, :destroy, :rsvp_submission, :rsvp_status, :printable_rsvp_status, :check_names, :update_names, :rsvp_form]
+
+  def route_rsvp
+    selected_guest = Guest.find_by(id: params[:guest_id])
+    if selected_guest
+      household = Household.find_by(id: selected_guest.household_id )
+      if current_household && current_household.guests.include?(selected_guest)
+        redirect_to rsvp_status_household_path(current_household)
+      else
+        redirect_to check_names_household_path(household.id)
+      end
+    else
+      redirect_to root_url, alert: 'Please submit a valid name for your RSVP'
+    end
+  end
+
+  def check_names
+    render layout: 'home_layout'
+  end
+
+  def update_names
+    @household.guests.each do |guest|
+      guest.salutation = params["guest_#{guest.id}_salutation"]
+      guest.first = params["guest_#{guest.id}_first"]
+      guest.last = params["guest_#{guest.id}_last"]
+      guest.save
+    end
+    redirect_to rsvp_form_household_path(@household.id), notice: "The names on your RSVP have been updated"
+  end
 
   def rsvp_form
-    selected_guest = Guest.find(params[:guest_id])
-    @household = Household.find_by(id: selected_guest.household_id )
     render layout: 'home_layout'
   end
 
   def rsvp_submission
     @household.guests.each do |guest|
-      guest.salutation = params["guest_#{guest.id}_salutation"]
-      guest.first = params["guest_#{guest.id}_first"]
-      guest.last = params["guest_#{guest.id}_last"]
-      guest.status = params["guest_#{guest.id}_status"]
-      guest.save
       guest.rsvps.each do |rsvp|
         rsvp.status = params["rsvp_#{rsvp.id}_status"]
         rsvp.save
@@ -54,6 +75,10 @@ class HouseholdsController < ApplicationController
   def rsvp_status
     session[:household_id] = @household.id
     render layout: 'home_layout'
+  end
+
+  def printable_rsvp_status
+    render layout: 'print'
   end
 
   def logout

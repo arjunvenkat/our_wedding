@@ -20,3 +20,9 @@
 .alert {
   margin-bottom: 0;
 }
+
+.form-control.inline-select {
+  display: inline-block;
+  width: auto;
+  margin-left: 1em;
+}

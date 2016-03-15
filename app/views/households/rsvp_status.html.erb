@@ -1,41 +1,45 @@
 <div class="rsvp-status">
-  <div class="rsvp-form">
-    <div class="image-heading">
-      <div class="screen">
-        <div class="container">
-          <h1>Event RSVPs for the <%= @household.name %> household <small><%= link_to "edit", rsvp_form_households_path(guest_id: @household.guests.first.id)  %></small></h1>
-          <p>You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards, please email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-          <% Event.all.each do |event| %>
-            <% if  event.rsvps_for_household(@household).present? %>
-              <div class="event <%= event.name.downcase.gsub(" ", "-") %>">
-                <h2 class="event-title">
-                  <div class="screen">
-                    <%= event.name %>
-                  </div>
-                </h2>
-                <h5 class="rsvp-date-time"><%= event.datetime.strftime("%A, %B #{event.datetime.day.ordinalize}") %> <small>at</small> <%= event.datetime.strftime("%l:%M %p") %></h5>
-                <%= render 'pages/address', event: event %>
-                <p><%= event.description %></p>
-                <h6>Attendees:</h6>
-                <ul>
-                  <% event.rsvps_for_household(@household).each do |rsvp| %>
-                    <% if rsvp.status == 'yes'  %>
-                      <%= rsvp.guest.full_name %>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+  <div class="image-heading">
+    <div class="screen main-screen">
+      <div class="container">
+      <h1>Event RSVPs for the <%= @household.name %> household</h1>
+        <p>You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards, please email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a></p>
+      <h5><%= link_to "edit attendance", rsvp_form_household_path(@household) %> | <%= link_to "edit names", check_names_household_path(@household) %></h5>
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <%= link_to "View print-friendly version", printable_rsvp_status_household_path(@household)  %> |
+        <%= link_to "View normal version", rsvp_status_household_path(@household)  %>
+        <% Event.all.each do |event| %>
+        <% if event.rsvps_for_household(@household).present? %>
+        <div class="event <%= event.name.downcase.gsub(" ", "-") %>">
+          <h2 class="event-title">
+            <div class="screen">
+              <%= event.name %>
+            </div>
+          </h2>
+          <h5 class="rsvp-date-time"><%= event.datetime.strftime("%A, %B #{event.datetime.day.ordinalize}") %> <small>at</small> <%= event.datetime.strftime("%l:%M %p") %></h5>
+          <%= render 'pages/address', event: event %>
+          <h6>Invited guests:</h6>
+          <ul>
+            <% event.rsvps_for_household(@household).each do |rsvp| %>
+            <% if rsvp.status == 'yes'  %>
+            <li><%= rsvp.guest.full_name %> <span class="attending">is attending <i class="fa fa-check"></i></li>
+            <% else %>
+            <li><%= rsvp.guest.full_name %> <span class="not-attending">is not attending <i class="fa fa-ban"></i></li>
+            <% end %>
+            <% end %>
+          </ul>
+          <p><%= event.description %></p>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 </div>
 

@@ -1,0 +1,29 @@
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= link_to "View print-friendly version", printable_rsvp_status_household_path(@household)  %> |
+      <%= link_to "View normal version", rsvp_status_household_path(@household)  %>
+      <% Event.all.each do |event| %>
+      <% if event.rsvps_for_household(@household).present? %>
+      <div>
+        <h4>
+          <%= event.name %>
+          <small><%= event.datetime.strftime("%A, %B #{event.datetime.day.ordinalize}") %> <small>at</small> <%= event.datetime.strftime("%l:%M %p") %></small>
+        </h4>
+        <h5 class="rsvp-address"><%= event.address1 %> <small><%= event.address2 %>, <%= event.city %> <%= event.state %></small></h5>
+
+        <h6>Invited guests:</h6>
+        <ul>
+          <% event.rsvps_for_household(@household).each do |rsvp| %>
+          <% if rsvp.status == 'yes'  %>
+          <li><%= rsvp.guest.full_name %> is attending
+          <% else %>
+          <li><%= rsvp.guest.full_name %> is not attending
+          <% end %>
+          <% end %>
+        </ul>
+        <p><%= event.description %></p>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
