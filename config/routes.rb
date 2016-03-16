@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :guests
   root 'pages#home'
   get '/hotel-info' => 'pages#hotel_info'
+  get '/gallery' => 'pages#gallery', as: 'gallery'
+  get '/gallery/:id' => 'pages#show_picture'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

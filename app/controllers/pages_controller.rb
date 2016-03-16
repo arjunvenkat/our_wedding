@@ -5,4 +5,12 @@ class PagesController < ApplicationController
 
   def hotel_info
   end
+
+  def gallery
+
+  end
+
+  def show_picture
+
+  end
 end

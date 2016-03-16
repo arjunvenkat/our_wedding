@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-3">
+    <h5><%= link_to "<< back to gallery", "/gallery"  %></h5>
+  </div>
+  <div class="col-md-9">
+    <div class="pull-right">
+      <h5>
+        <% if params[:id].to_i > 1  %>
+          <%= link_to "< prev", "/gallery/#{params[:id].to_i - 1}"  %>
+        <% end %>
+        <% if params[:id].to_i < 16  %>
+          <%= link_to "next >", "/gallery/#{params[:id].to_i + 1}"  %>
+        <% end %>
+      </h5>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= image_tag("kritiarjun#{params[:id]}.jpg", class: 'img-responsive') %>
+  </div>
+</div>
