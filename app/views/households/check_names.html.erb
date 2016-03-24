@@ -13,7 +13,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
+    <div class="col-lg-10 col-lg-offset-1">
       <%= form_tag(update_names_household_path(@household)) do %>
         <% @household.guests.each_with_index do |guest, index| %>
           <div class="form-group">
@@ -23,11 +23,14 @@
                 <%= text_field_tag "guest_#{guest.id}_salutation", guest.salutation, placeholder: 'Title', class: 'form-control'  %>
               </div>
 
-              <div class="col-sm-5">
+              <div class="col-sm-2">
                 <%= text_field_tag "guest_#{guest.id}_first", guest.first, placeholder: 'First name', class: 'form-control'  %>
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-3">
                 <%= text_field_tag "guest_#{guest.id}_last", guest.last, placeholder: 'Last name', class: 'form-control'  %>
+              </div>
+              <div class="col-sm-4">
+                <%= text_field_tag "guest_#{guest.id}_email", guest.email, placeholder: 'Email', class: 'form-control'  %>
               </div>
             </div>
           </div>

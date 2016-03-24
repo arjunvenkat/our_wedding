@@ -1,6 +1,32 @@
 class HouseholdsController < ApplicationController
   before_action :set_household, only: [:show, :edit, :update, :destroy, :rsvp_submission, :rsvp_status, :printable_rsvp_status, :check_names, :update_names, :rsvp_form]
 
+
+  def resend_rsvp
+    guest = Guest.find_by_email(params[:email])
+    if guest
+      html = "<p>We're excited to have you join us at our wedding!</p>"
+      html = "<p>Click the link below to RSVP:</p>"
+      html << "<p><a href='#{check_names_household_url(guest.household, guest.household.unique_hex)}'>#{check_names_household_url(guest.household, guest.household.unique_hex)}</a></p>"
+      html = "<p>Kriti and Arjun</p>"
+      text = "Go to the following URL to RSVP to Kriti and Arjun's wedding: #{check_names_household_url(guest.household, guest.household.unique_hex)}"
+      client = SendGrid::Client.new(api_key: ENV["sendgrid_api_key"])
+      mail = SendGrid::Mail.new do |m|
+        m.to = guest.email
+        m.from = 'noreply@arjunandkriti.com'
+        m.subject = "RSVP for Kriti and Arjun's wedding"
+        m.text = text
+        m.html = html
+      end
+      res = client.send(mail)
+      puts res.inspect
+
+      redirect_to root_url, notice: "The RSVP email was resent to #{params[:email]}"
+    else
+      redirect_to root_url, alert: "We couldn't find your email address. Please make sure you entered it correctly or contact Arjun at avenkat2@gmail.com for assistance"
+    end
+  end
+
   def route_rsvp
     selected_guest = Guest.find_by(id: params[:guest_id])
     if selected_guest
@@ -24,6 +50,7 @@ class HouseholdsController < ApplicationController
       guest.salutation = params["guest_#{guest.id}_salutation"]
       guest.first = params["guest_#{guest.id}_first"]
       guest.last = params["guest_#{guest.id}_last"]
+      guest.email = params["guest_#{guest.id}_email"]
       guest.save
     end
     redirect_to rsvp_form_household_path(@household.id, @household.unique_hex), notice: "The names on your RSVP have been updated"

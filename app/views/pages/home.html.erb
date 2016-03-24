@@ -9,11 +9,14 @@
   <div class="row" id="rsvp">
     <div class="col-md-12">
       <div class="choose-household-form">
-        <h2>Find your RSVP and access event info with the form below</h2>
-        <h3>Search using your name or the name of someone in your household. Please submit your RSVP by May 1<sup>st</sup>.</h3>
-        <%= form_tag(route_rsvp_households_path, method: :get) do %>
-          <%= select_tag :guest_id, options_from_collection_for_select(Guest.has_full_name, :id, :full_name), include_blank: true %>
-          <%= submit_tag "Search for household", class: 'btn btn-primary' %>
+        <h2>RSVP info</h2>
+        <p class="half-width-info">We've sent an email to at least one member of your household that contains an RSVP link. The email was sent from "noreply@kritiandarjun.com" and had a subject line of "RSVP for Kriti and Arjun's Wedding". If you haven't gotten anything yet, check your spam folder or resend the link by entering your email in the form below. Email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a> if you're still having issues.</p>
+        <%= form_tag(resend_rsvp_households_path, method: :get, class: 'form-inline') do %>
+          <div class="form-group">
+            <%= text_field_tag :email, "", placeholder: 'kriti@example.com', class: 'form-control' %>
+          </div>
+          <button type="submit" class="btn btn-primary">Resend RSVP link</button>
+          <%#= submit_tag "Resend RSVP link", class: 'btn btn-primary' %>
         <% end -%>
       </div>
     </div>
