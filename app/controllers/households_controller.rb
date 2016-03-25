@@ -6,9 +6,9 @@ class HouseholdsController < ApplicationController
     guest = Guest.find_by_email(params[:email])
     if guest
       html = "<p>We're excited to have you join us at our wedding!</p>"
-      html = "<p>Click the link below to RSVP:</p>"
+      html << "<p>Click the link below to RSVP:</p>"
       html << "<p><a href='#{check_names_household_url(guest.household, guest.household.unique_hex)}'>#{check_names_household_url(guest.household, guest.household.unique_hex)}</a></p>"
-      html = "<p>Kriti and Arjun</p>"
+      html << "<p>Kriti and Arjun</p>"
       text = "Go to the following URL to RSVP to Kriti and Arjun's wedding: #{check_names_household_url(guest.household, guest.household.unique_hex)}"
       client = SendGrid::Client.new(api_key: ENV["sendgrid_api_key"])
       mail = SendGrid::Mail.new do |m|
