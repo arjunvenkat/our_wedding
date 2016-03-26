@@ -1,6 +1,12 @@
 class HouseholdsController < ApplicationController
   before_action :set_household, only: [:show, :edit, :update, :destroy, :rsvp_submission, :rsvp_status, :printable_rsvp_status, :check_names, :update_names, :rsvp_form]
+  before_action :check_for_editable_rsvp, only: [:check_names, :rsvp_form]
 
+  def check_for_editable_rsvp
+    unless @household.can_edit_rsvp?
+      redirect_to rsvp_status_household_path(@household.id, @household.unique_hex), alert: "Your RSVP has been finalized. If you still need to make changes, please email Arjun at avenkat2@gmail.com"
+    end
+  end
 
   def resend_rsvp
     guest = Guest.find_by_email(params[:email])
@@ -24,20 +30,6 @@ class HouseholdsController < ApplicationController
       redirect_to root_url, notice: "The RSVP email was resent to #{params[:email]}"
     else
       redirect_to root_url, alert: "We couldn't find your email address. Please make sure you entered it correctly or contact Arjun at avenkat2@gmail.com for assistance"
-    end
-  end
-
-  def route_rsvp
-    selected_guest = Guest.find_by(id: params[:guest_id])
-    if selected_guest
-      household = Household.find_by(id: selected_guest.household_id )
-      if current_household && current_household.guests.include?(selected_guest)
-        redirect_to rsvp_status_household_path(current_household, current_household.unique_hex)
-      else
-        redirect_to check_names_household_path(household.id, household.unique_hex)
-      end
-    else
-      redirect_to root_url, alert: 'Please submit a valid name for your RSVP'
     end
   end
 
@@ -66,6 +58,11 @@ class HouseholdsController < ApplicationController
         rsvp.status = params["rsvp_#{rsvp.id}_status"]
         rsvp.save
       end
+    end
+
+    if @household.replied_at.blank?
+      @household.replied_at = Time.now
+      @household.save
     end
 
     html = "<p>Your RSVP to Kriti and Arjun's wedding has been updated. Here's what we've got:</p>"
