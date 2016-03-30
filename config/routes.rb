@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :events
   resources :households do
     get 'route_rsvp' => 'households#route_rsvp', on: :collection

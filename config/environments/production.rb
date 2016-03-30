@@ -1,4 +1,14 @@
 Rails.application.configure do
+  config.action_mailer.default_url_options = { :host => 'www.kritiandarjun.com'}
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    user_name: ENV['sendgrid_username'],
+    password: ENV['sendgrid_password'],
+    domain: 'heroku.com',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

@@ -1,4 +1,5 @@
 class Household < ActiveRecord::Base
+  paginates_per 30
   has_many :guests, -> { order(position: :asc) }, dependent: :destroy
   has_many :rsvps, through: :guests
   default_scope { order('last ASC') }

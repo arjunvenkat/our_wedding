@@ -24,6 +24,14 @@
         <% else %>
           <li><a href="<%= root_url(anchor: 'rsvp') %>">RSVP</a></li>
         <% end %>
+
+        <% if current_user.present? %>
+          <li><a href="<%= households_path %>">Households</a></li>
+          <li><a href="<%= guests_path %>">Guests</a></li>
+          <li><a href="<%= events_path %>">Events</a></li>
+          <li><a href="<%= rsvps_path %>">RSVPs</a></li>
+          <li><a data-method="delete" href="<%= destroy_user_session_path %>">Log out as admin</a></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

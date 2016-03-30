@@ -2,7 +2,7 @@
 
 <h1>Listing Rsvps</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Guest</th>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= rsvp.guest.full_name %></td>
         <td><%= rsvp.event.name %></td>
-        <td><%= rsvp.status %></td>
+        <td><%= rsvp_status(rsvp.guest, rsvp.event) %></td>
         <td><%= link_to 'Show', rsvp %></td>
         <td><%= link_to 'Edit', edit_rsvp_path(rsvp) %></td>
         <td><%= link_to 'Destroy', rsvp, method: :delete, data: { confirm: 'Are you sure?' } %></td>

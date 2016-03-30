@@ -1,5 +1,12 @@
 class GuestsController < ApplicationController
   before_action :set_guest, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
+  def check_if_admin
+    unless current_user && current_user.admin?
+      redirect_to root_url, alert: "You're not authorized to go there"
+    end
+  end
 
   # GET /guests
   # GET /guests.json

@@ -1,6 +1,13 @@
 class HouseholdsController < ApplicationController
+  before_action :check_if_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :set_household, only: [:show, :edit, :update, :destroy, :rsvp_submission, :rsvp_status, :printable_rsvp_status, :check_names, :update_names, :rsvp_form]
   before_action :check_for_editable_rsvp, only: [:check_names, :rsvp_form]
+
+  def check_if_admin
+    unless current_user && current_user.admin?
+      redirect_to root_url, alert: "You're not authorized to go there"
+    end
+  end
 
   def check_for_editable_rsvp
     unless @household.can_edit_rsvp?
@@ -113,7 +120,7 @@ class HouseholdsController < ApplicationController
   # GET /households
   # GET /households.json
   def index
-    @households = Household.all
+    @households = Household.order(:last).page params[:page]
   end
 
   # GET /households/1
