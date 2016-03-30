@@ -26,3 +26,21 @@
   width: auto;
   margin-left: 1em;
 }
+
+
+.form-inline .form-group.resend-rsvp-field input[type="text"].home-input {
+    margin-top: 1px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 10px;
+    height: 36px;
+    width: 100%;
+    box-shadow: none;
+}
+
+.resend-rsvp-field + button {
+}
+
+.form-inline .form-group.resend-rsvp-field input[type="text"].home-input:focus {
+  border-color: #2196F3;
+}
