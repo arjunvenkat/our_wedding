@@ -8,7 +8,7 @@ module HouseholdsHelper
         message = "Your RSVP status has been finalized. If you still need to make changes, "
       end
     else
-      message = "You have a week to make changes once you've submitted your RSVP. If you still need to make changes afterwards,"
+      message = "You haven't submitted your RSVP yet. Click the 'edit attendance' link to do so. Once, you've submitted, you have a week to make any changes. If you still need to make changes afterwards,"
     end
     return raw("#{message} please email Arjun at #{content_tag(:a, "avenkat2@gmail.com", href: "avenkat2@gmail.com")}")
   end

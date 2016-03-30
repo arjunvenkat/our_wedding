@@ -1,4 +1,7 @@
 class Rsvp < ActiveRecord::Base
+  validates :guest_id,
+            :event_id, presence: true
+
   belongs_to :guest
   acts_as_list scope: :guest
   belongs_to :event

@@ -17,7 +17,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<%= gallery_path %>">Photos</a></li>
         <li><a href="<%= root_url(anchor: 'accomodations') %>">Accomodations</a></li>
-        <% if session[:household_id].present? %>
+        <% if session[:household_id].present? && current_household %>
           <li><a href="<%= rsvp_status_household_path(current_household.id, current_household.unique_hex) %>">RSVP status and event info</a></li>
           <li><a data-method="delete" href="<%= logout_household_path(current_household.id) %>">Log out</a></li>
 

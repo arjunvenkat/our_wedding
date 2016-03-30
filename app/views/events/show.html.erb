@@ -40,5 +40,12 @@
   <%= @event.zip %>
 </p>
 
+<p>Invited guests:</p>
+<ul>
+<% @event.rsvps.each do |rsvp| %>
+  <li><%= rsvp.inspect %></li>
+<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

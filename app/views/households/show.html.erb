@@ -5,5 +5,18 @@
   <%= @household.name %>
 </p>
 
+<p>Guests:</p>
+<ul>
+  <% @household.guests.each do |guest| %>
+    <li><%= guest.full_name %></li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to 'View RSVP status', rsvp_status_household_path(@household.id, @household.unique_hex)  %> |
+  <%= link_to 'Edit RSVP status', rsvp_form_household_path(@household.id, @household.unique_hex)  %>
+
+</p>
+
 <%= link_to 'Edit', edit_household_path(@household) %> |
 <%= link_to 'Back', households_path %>
