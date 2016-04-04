@@ -4,17 +4,17 @@
 <div class="row">
   <div class="col-md-2">
     <div class="dashboard-item">
-      <div class="dashboard-num"><%= @households.count %></div> <div>total households</div>
+      <div class="dashboard-num"><%= Household.all.count %></div> <div>total households</div>
     </div>
   </div>
   <div class="col-md-2">
     <div class="dashboard-item">
-      <div class="dashboard-num"><%= @households.replied.count %></div> <div>have replied</div>
+      <div class="dashboard-num"><%= Household.all.replied.count %></div> <div>have replied</div>
     </div>
   </div>
   <div class="col-md-2">
     <div class="dashboard-item">
-      <div class="dashboard-num"><%= @households.need_to_reply.count %></div> <div>need to reply</div>
+      <div class="dashboard-num"><%= Household.all.need_to_reply.count %></div> <div>need to reply</div>
     </div>
   </div>
 </div>

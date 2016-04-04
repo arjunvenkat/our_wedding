@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :household_id %><br>
-    <%= f.collection_select :household_id, Household.all, :id, :name %>
+    <%= f.collection_select :household_id, Household.all, :id, :full_name %>
   </div>
   <div class="field">
     <%= f.label :salutation %><br>
@@ -30,6 +30,10 @@
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.text_field :category %>
   </div>
   <div class="actions">
     <%= f.submit %>
