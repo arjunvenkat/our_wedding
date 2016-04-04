@@ -11,7 +11,7 @@ class GuestsController < ApplicationController
   # GET /guests
   # GET /guests.json
   def index
-    @guests = Guest.all
+    @guests = Guest.order(:last).page params[:page]
   end
 
   # GET /guests/1

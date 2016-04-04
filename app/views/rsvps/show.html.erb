@@ -13,6 +13,7 @@
 <p>
   <strong>Status:</strong>
   <%= @rsvp.status %>
+  <%= rsvp_status(@rsvp.guest, @rsvp.event) %>
 </p>
 
 <%= link_to 'Edit', edit_rsvp_path(@rsvp) %> |

@@ -1,11 +1,16 @@
 class Guest < ActiveRecord::Base
+  paginates_per 30
   belongs_to :household
   acts_as_list scope: :household
-  has_many :rsvps, -> { order(position: :asc) }
+  has_many :rsvps, -> { order(position: :asc) }, dependent: :destroy
   default_scope { order('last ASC') }
 
   def full_name
-    return "#{salutation} #{first} #{last}"
+    if salutation.present?
+      return "#{salutation} #{first} #{last}"
+    else
+      return "#{first} #{last}"
+    end
   end
 
   scope :has_full_name, -> { where("first <> '' AND last <> ''") }

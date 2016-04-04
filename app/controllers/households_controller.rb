@@ -17,12 +17,14 @@ class HouseholdsController < ApplicationController
 
   def resend_rsvp
     guest = Guest.find_by_email(params[:email])
+    household = guest.household
     if guest
-      html = "<p>We're excited to have you join us at our wedding!</p>"
-      html << "<p>Click the link below to RSVP:</p>"
-      html << "<p><a href='#{check_names_household_url(guest.household, guest.household.unique_hex)}'>#{check_names_household_url(guest.household, guest.household.unique_hex)}</a></p>"
-      html << "<p>Kriti and Arjun</p>"
-      text = "Go to the following URL to RSVP to Kriti and Arjun's wedding: #{check_names_household_url(guest.household, guest.household.unique_hex)}"
+      html = "<p>Dear #{guest.full_name},</p>"
+      html << "<p>We would love for you to join us at our wedding on June 11<sup>th</sup>! You should be receiving a paper invitation in the mail soon, but you can RSVP at any time and access event information using the following link:</p>"
+      html << "<p><a href='#{check_names_household_url(household, household.unique_hex)}'>#{check_names_household_url(household, household.unique_hex)}</a></p>"
+      html << "<p>We look forward to hearing back from you! Please reply by May 1<sup>st</sup>.</p>"
+      html << "<p>- Kriti and Arjun</p>"
+      text = "We would love to have you join us at our wedding. Please access the following URL to RSVP: #{check_names_household_url(household, household.unique_hex)} - Kriti and Arjun"
       client = SendGrid::Client.new(api_key: ENV["sendgrid_api_key"])
       mail = SendGrid::Mail.new do |m|
         m.to = guest.email
@@ -33,7 +35,10 @@ class HouseholdsController < ApplicationController
       end
       res = client.send(mail)
       puts res.inspect
-
+      if res.code == 200 && household.initial_email_sent == false
+        household.initial_email_sent = true
+        household.save
+      end
       redirect_to root_url, notice: "The RSVP email was resent to #{params[:email]}"
     else
       redirect_to root_url, alert: "We couldn't find your email address. Please make sure you entered it correctly or contact Arjun at avenkat2@gmail.com for assistance"

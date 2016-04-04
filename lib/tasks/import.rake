@@ -6,11 +6,12 @@ namespace :import do
     ceremony = Event.find_by(name: EVENTS[:ceremony])
     rehearsal_dinner = Event.find_by(name: EVENTS[:rehearsal_dinner])
     reception = Event.find_by(name: EVENTS[:reception])
-    CSV.foreach("#{Rails.root}/db/data/kriti-arjun-guests.csv", headers: true) do |row|
-      existing_household = Household.find_by(first: row[6].try(:strip), last: row[7].try(:strip))
+
+    CSV.foreach("#{Rails.root}/db/data/master-guest-list.csv", headers: true) do |row|
+      existing_household = Household.find_by(first: row[7].try(:strip), last: row[8].try(:strip))
       household = existing_household || Household.new({
-          first: row[6].try(:strip),
-          last: row[7].try(:strip)
+          first: row[7].try(:strip),
+          last: row[8].try(:strip)
         })
       unless household.id.present?
         hex = ""
@@ -21,23 +22,27 @@ namespace :import do
         household.unique_hex = hex
         household.save
       end
-      print household.full_name
-      existing_guest = Guest.find_by(first: row[0].try(:strip), last: row[1].try(:strip), email: row[9].try(:strip))
+      existing_guest = Guest.find_by(first: row[1].try(:strip), last: row[2].try(:strip), email: row[9].try(:strip))
       guest = existing_guest || Guest.create({
-          first: row[0].try(:strip),
-          last: row[1].try(:strip),
-          email: row[9].try(:strip),
+          salutation: row[0].try(:strip),
+          first: row[1].try(:strip),
+          last: row[2].try(:strip),
+          email: row[10].try(:strip),
+          category: row[11].try(:strip),
           household_id: household.id
         })
-      print " - #{guest.full_name}\n"
-      Rsvp.find_or_create_by(guest_id: guest.id, event_id: ceremony.id) if row[2].present?
-      Rsvp.find_or_create_by(guest_id: guest.id, event_id: reception.id) if row[3].present?
-      Rsvp.find_or_create_by(guest_id: guest.id, event_id: sangeet.id) if row[4].present?
-      Rsvp.find_or_create_by(guest_id: guest.id, event_id: rehearsal_dinner.id) if row[5].present?
-
+      print "#{household.full_name} - #{guest.full_name}\n"
+      ceremony_rsvp = Rsvp.find_by(guest_id: guest.id, event_id: ceremony.id)
+      Rsvp.create(guest_id: guest.id, event_id: ceremony.id, status: "yes") if ceremony_rsvp.blank? && row[3].present?
+      reception_rsvp = Rsvp.find_by(guest_id: guest.id, event_id: reception.id)
+      Rsvp.create(guest_id: guest.id, event_id: reception.id, status: "yes") if reception_rsvp.blank? && row[4].present?
+      sangeet_rsvp = Rsvp.find_by(guest_id: guest.id, event_id: sangeet.id)
+      Rsvp.create(guest_id: guest.id, event_id: sangeet.id, status: "yes") if sangeet_rsvp.blank? && row[5].present?
+      rehearsal_dinner_rsvp = Rsvp.find_by(guest_id: guest.id, event_id: rehearsal_dinner.id)
+      Rsvp.create(guest_id: guest.id, event_id: rehearsal_dinner.id, status: "yes") if rehearsal_dinner_rsvp.blank? && row[6].present?
 
     end
-    puts "There are #{Household.count} guests in the database"
+    puts "There are #{Household.count} households in the database"
     puts "There are #{Guest.count} guests in the database"
   end
 end

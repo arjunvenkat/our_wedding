@@ -82,7 +82,7 @@ e1 = Event.create(
 e2 = Event.create(
       name: EVENTS[:rehearsal_dinner],
       description: "A dinner for close friends and family of Kriti and Arjun",
-      datetime: DateTime.strptime("06/10/2016 19:30", "%m/%d/%Y %H:%M"),
+      datetime: DateTime.strptime("06/10/2016 19:00", "%m/%d/%Y %H:%M"),
       address1: "DL Loft",
       address2: "3050 N Lincoln Ave",
       city: "Chicago",
@@ -92,7 +92,7 @@ e2 = Event.create(
 e3 = Event.create(
       name: EVENTS[:ceremony],
       description: "The ceremony uniting Kriti and Arjun in marriage. The baraat begins at 9:30am and the ceremony begins at 10:30am",
-      datetime: DateTime.strptime("06/11/2016 10:30", "%m/%d/%Y %H:%M"),
+      datetime: DateTime.strptime("06/11/2016 9:30", "%m/%d/%Y %H:%M"),
       address1: "The Westin Chicago Northwest",
       address2: "400 Park Blvd",
       city: "Itasca",

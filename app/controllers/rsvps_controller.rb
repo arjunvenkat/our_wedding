@@ -16,7 +16,7 @@ class RsvpsController < ApplicationController
   # GET /rsvps
   # GET /rsvps.json
   def index
-    @rsvps = Rsvp.all
+    @rsvps = Rsvp.joins(:guest).order('guests.last').page params[:page]
   end
 
   # GET /rsvps/1

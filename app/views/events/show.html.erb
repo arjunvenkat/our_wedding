@@ -1,51 +1,69 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
+<h1><%= @event.name %> <small><%= @event.datetime.strftime("%A, %B #{@event.datetime.day.ordinalize}") %></small></h1>
+<h4>
+
   <%= @event.description %>
-</p>
+</h4>
 
 <p>
-  <strong>Datetime:</strong>
-  <%= @event.datetime %>
+  <%= @event.address1 %> <br>
+  <%= @event.address2 %> <br>
+  <%= @event.city %>, <%= @event.state %> <%= @event.zip %>
 </p>
 
-<p>
-  <strong>Address1:</strong>
-  <%= @event.address1 %>
-</p>
 
-<p>
-  <strong>Address2:</strong>
-  <%= @event.address2 %>
-</p>
 
-<p>
-  <strong>City:</strong>
-  <%= @event.city %>
-</p>
+<div class="row">
+  <div class="col-md-2">
+    <div class="dashboard-item">
+      <div class="dashboard-num"><%= @event.rsvps.count %></div> <div>total guests</div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="dashboard-item">
+      <div class="dashboard-num"><%= @event.rsvps.attending.count %></div> <div>guests are attending</div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="dashboard-item">
+      <div class="dashboard-num"><%= @event.rsvps.not_attending.count %></div> <div>guests are not attending</div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>State:</strong>
-  <%= @event.state %>
-</p>
+<h2>Invited guests:</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Attending?</th>
+      <th>Email</th>
+      <th>Household</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @event.zip %>
-</p>
-
-<p>Invited guests:</p>
-<ul>
-<% @event.rsvps.each do |rsvp| %>
-  <li><%= rsvp.inspect %></li>
-<% end %>
-</ul>
+  <tbody>
+    <% @guests.each do |guest| %>
+      <tr>
+        <td><%= guest.salutation %></td>
+        <td><%= guest.first %></td>
+        <td><%= guest.last %></td>
+        <td><%= rsvp_status(guest, @event) %></td>
+        <td><%= guest.email %></td>
+        <td><%= guest.household.full_name %></td>
+        <td><%= link_to 'Show', guest %></td>
+        <td><%= link_to 'Edit', edit_guest_path(guest) %></td>
+        <td><%= link_to 'Destroy', guest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @guests %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330224123) do
+ActiveRecord::Schema.define(version: 20160402191227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,16 +40,18 @@ ActiveRecord::Schema.define(version: 20160330224123) do
     t.string   "salutation"
     t.string   "status",       default: "attending"
     t.integer  "position"
+    t.string   "category"
   end
 
   create_table "households", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "unique_hex"
     t.datetime "replied_at"
     t.string   "first"
     t.string   "last"
+    t.boolean  "initial_email_sent", default: false
   end
 
   create_table "rsvps", force: :cascade do |t|

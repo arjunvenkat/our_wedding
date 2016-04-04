@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @guests = @event.guests.order(:last).page params[:page]
   end
 
   # GET /events/new

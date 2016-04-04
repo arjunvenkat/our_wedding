@@ -6,4 +6,7 @@ class Event < ActiveRecord::Base
       |guest| Rsvp.find_by(guest_id: guest.id, event_id: id)
     }
   end
+  def attending_guests
+    guests.joins(:rsvps).where('rsvps.status' => 'yes')
+  end
 end

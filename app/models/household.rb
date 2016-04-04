@@ -3,6 +3,8 @@ class Household < ActiveRecord::Base
   has_many :guests, -> { order(position: :asc) }, dependent: :destroy
   has_many :rsvps, through: :guests
   default_scope { order('last ASC') }
+  scope :replied, -> { where.not(replied_at: nil) }
+  scope :need_to_reply, -> { all - replied }
 
   def name
     last

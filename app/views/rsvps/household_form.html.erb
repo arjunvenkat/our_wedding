@@ -78,17 +78,6 @@
 
 <script>
   $(function(){
-    // Initial page setup
-    $('.guest-status').each(function(){
-      var status = $(this).val();
-      var guestId = $(this).attr("id").split("_")[1]
-      if (status == "attending") {
-        $("#guest_" + guestId + "_rsvps").show();
-      } else {
-        $("#guest_" + guestId + "_rsvps").hide();
-      }
-    })
-
     $('.rsvp-status').each(function(){
       var status = $(this).val();
       var rsvpId = $(this).attr("id").split("_")[1]
@@ -100,17 +89,6 @@
       } else {
         $("#rsvp_" + rsvpId + "_indicator")
           .addClass("fa fa-times");
-      }
-    });
-
-    // Toggle rsvps for each guest depending on their status
-    $('.guest-status').change(function(){
-      var status = $(this).val();
-      var guestId = $(this).attr("id").split("_")[1]
-      if (status == "attending") {
-        $("#guest_" + guestId + "_rsvps").show();
-      } else {
-        $("#guest_" + guestId + "_rsvps").hide();
       }
     });
 
