@@ -22,14 +22,19 @@ namespace :import do
         household.unique_hex = hex
         household.save
       end
-      existing_guest = Guest.find_by(first: row[1].try(:strip), last: row[2].try(:strip), email: row[10].try(:strip))
+      existing_guest = Guest.find_by({
+        first: row[1].try(:strip),
+        last: row[2].try(:strip),
+        email: row[10].try(:strip),
+        household_id: household.id
+      })
       guest = existing_guest || Guest.create({
-          salutation: row[0].try(:strip),
-          first: row[1].try(:strip),
-          last: row[2].try(:strip),
-          email: row[10].try(:strip),
-          category: row[11].try(:strip),
-          household_id: household.id
+        salutation: row[0].try(:strip),
+        first: row[1].try(:strip),
+        last: row[2].try(:strip),
+        email: row[10].try(:strip),
+        category: row[11].try(:strip),
+        household_id: household.id
         })
       print "#{household.full_name} - #{guest.full_name}\n"
       ceremony_rsvp = Rsvp.find_by(guest_id: guest.id, event_id: ceremony.id)
