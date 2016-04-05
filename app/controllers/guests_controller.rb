@@ -11,7 +11,14 @@ class GuestsController < ApplicationController
   # GET /guests
   # GET /guests.json
   def index
-    @guests = Guest.order(:last).page params[:page]
+    if params[:filter]
+      @guests = Guest.where(category: params[:filter])
+      @guest_filter_class = params[:filter].parameterize
+    else
+      @guests = Guest.all
+      @guest_filter_class = "all"
+    end
+    @guests = @guests.order(:last).page params[:page]
   end
 
   # GET /guests/1
