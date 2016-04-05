@@ -4,10 +4,10 @@
 
 <h4>Filter by category</h4>
 <div class="btn-group guest-filter <%= @guest_filter_class %>" role="group" aria-label="...">
-  <a href="<%= guests_path %>"class="btn btn-default all">All</a>
-  <a href="<%= guests_path(filter: 'Kriti and Arjun') %>"class="btn btn-default kriti-and-arjun">Kriti and Arjun</a>
-  <a href="<%= guests_path(filter: 'Goel') %>"class="btn btn-default goel">Goel</a>
-  <a href="<%= guests_path(filter: 'Venkataswamy') %>"class="btn btn-default venkataswamy">Venkataswamy</a>
+  <a href="<%= guests_path %>"class="btn btn-default all">All (<%= Guest.count %>)</a>
+  <a href="<%= guests_path(filter: 'Kriti and Arjun') %>"class="btn btn-default kriti-and-arjun">Kriti and Arjun (<%= Guest.where(category: "Kriti and Arjun").count %>)</a>
+  <a href="<%= guests_path(filter: 'Goel') %>"class="btn btn-default goel">Goel (<%= Guest.where(category: "Goel").count %>)</a>
+  <a href="<%= guests_path(filter: 'Venkataswamy') %>"class="btn btn-default venkataswamy">Venkataswamy (<%= Guest.where(category: "Venkataswamy").count %>)</a>
 </div>
 
 <br>
