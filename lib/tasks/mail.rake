@@ -22,18 +22,22 @@ namespace :mail do
             client = SendGrid::Client.new(api_key: ENV["sendgrid_api_key"])
             mail = SendGrid::Mail.new do |m|
               m.to = guest.email
-              m.from = 'noreply@arjunandkriti.com'
+              m.from = 'noreply@kritiandarjun.com'
               m.subject = "RSVP for Kriti and Arjun's wedding"
               m.text = text
               m.html = html
             end
             res = client.send(mail)
-            puts res.inspect
-            if res.code == 200 && household.initial_email_sent == false
-              household.initial_email_sent = true
-              household.save
+            if res.code == 200
+              if household.initial_email_sent == false
+                household.initial_email_sent = true
+                household.save
+              end
+              puts "    email sent to #{guest.full_name} at #{guest.email}"
+            else
+              puts "    there was an error sending to #{guest.full_name} at #{guest.email}"
+              puts res.inspect
             end
-            puts "    email sent to #{guest.full_name} at #{guest.email}"
             sleep 1
           else
             puts "    no email present for #{guest.full_name}"

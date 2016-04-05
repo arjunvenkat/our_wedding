@@ -11,7 +11,7 @@ class Rsvp < ActiveRecord::Base
   scope :not_attending, -> { where.not(status: "yes") }
 
   def readable_status
-    status == "yes" ? "Is attending" : "Is not attending"
+    status == "yes" ? "is attending" : "is not attending"
   end
 
 
