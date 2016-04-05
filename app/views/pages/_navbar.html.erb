@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<%= gallery_path %>">Photos</a></li>
+        <!-- <li><a href="<%#= gallery_path %>">Photos</a></li> -->
         <li><a href="<%= root_url(anchor: 'accomodations') %>">Accomodations</a></li>
         <% if session[:household_id].present? && current_household %>
           <li><a href="<%= rsvp_status_household_path(current_household.id, current_household.unique_hex) %>">RSVP status and event info</a></li>

@@ -14,7 +14,7 @@ namespace :mail do
         household.guests.each do |guest|
           if guest.email.present?
             html = "<p>Dear #{guest.full_name},</p>"
-            html << "<p>We would love for you to join us at our wedding on June 11<sup>th</sup>! You should be receiving a paper invitation in the mail soon, but you can RSVP at any time and access event information using the following link:</p>"
+            html << "<p>We would love for you join us at our wedding on June 11<sup>th</sup>! You should be receiving a paper invitation in the mail soon, but you can RSVP at any time and access event information using the following link:</p>"
             html << "<p><a href='#{check_names_household_url(household, household.unique_hex)}'>#{check_names_household_url(household, household.unique_hex)}</a></p>"
             html << "<p>We look forward to hearing back from you! Please reply by May 1<sup>st</sup>.</p>"
             html << "<p>- Kriti and Arjun</p>"
