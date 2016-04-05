@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Household Name:</strong>
   <%= @household.name %>
 </p>
 
@@ -11,6 +11,23 @@
     <li><%= guest.full_name %></li>
   <% end %>
 </ul>
+
+<h5>RSVP info</h5>
+<% Event.all.each do |event| %>
+  <% if event.rsvps_for_household(@household).present? %>
+      <h6><%= event.name %></h6>
+    <ul>
+      <% event.rsvps_for_household(@household).each do |rsvp| %>
+        <% if rsvp.status == 'yes'  %>
+        <li><%= rsvp.guest.full_name %> <span class="attending">is attending <i class="fa fa-check"></i></li>
+        <% else %>
+        <li><%= rsvp.guest.full_name %> <span class="not-attending">is not attending <i class="fa fa-ban"></i></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 
 <p>
   <%= link_to 'View RSVP status', rsvp_status_household_path(@household.id, @household.unique_hex)  %> |
