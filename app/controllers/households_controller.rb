@@ -41,7 +41,7 @@ class HouseholdsController < ApplicationController
       end
       redirect_to root_url, notice: "The RSVP email was resent to #{params[:email]}"
     else
-      redirect_to root_url, alert: "We couldn't find your email address. Please make sure you entered it correctly or contact Arjun at avenkat2@gmail.com for assistance"
+      redirect_to root_url, alert: "We couldn't find your email address. Please make sure you entered it correctly or try the email of another member of your household. Contact Arjun at avenkat2@gmail.com for assistance"
     end
   end
 

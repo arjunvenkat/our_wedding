@@ -10,7 +10,7 @@
     <div class="col-md-12">
       <div class="choose-household-form">
         <h2>RSVP info</h2>
-        <p class="half-width-info">We've sent an email to at least one member of your household that contains an RSVP link. The email was sent from "noreply@kritiandarjun.com" and had a subject line of "RSVP for Kriti and Arjun's Wedding". If you haven't gotten anything yet, check your spam folder or resend the link by entering your email in the form below. Email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a> if you're still having issues.</p>
+        <p class="half-width-info">We've sent an email to at least one member of your household that contains an RSVP link. The email was sent from "noreply@kritiandarjun.com" and had a subject line that included "Kriti and Arjun's Wedding". If you haven't gotten anything yet, check your spam folder or resend the link by entering your email in the form below. Email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a> if you're still having issues.</p>
         <%= form_tag(resend_rsvp_households_path, method: :get, class: 'form-inline') do %>
           <div class="form-group resend-rsvp-field">
             <%= text_field_tag :email, "", placeholder: 'kriti.goel@example.com', class: 'form-control home-input' %>

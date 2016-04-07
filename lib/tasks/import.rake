@@ -25,7 +25,7 @@ namespace :import do
       existing_guest = Guest.find_by({
         first: row[1].try(:strip),
         last: row[2].try(:strip),
-        email: row[10].try(:strip),
+        email: row[9].try(:strip),
         household_id: household.id
       })
       guest = existing_guest || Guest.create({

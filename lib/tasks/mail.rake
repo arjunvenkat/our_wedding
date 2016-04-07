@@ -5,6 +5,7 @@ else
 end
 include Rails.application.routes.url_helpers
 default_url_options[:host] = host
+
 namespace :mail do
   desc "Sends initial RSVP email to all guests"
   task initial_rsvp: :environment do
@@ -43,6 +44,38 @@ namespace :mail do
             puts "    no email present for #{guest.full_name}"
           end
         end
+      end
+    end
+  end
+
+  desc "Sends re-reply email to Goel guests"
+  task re_rsvp: :environment do
+    Guest.where(category: "Goel").each do |guest|
+      if guest.email.present?
+        household = guest.household
+        html = "<p>Dear #{guest.full_name},</p>"
+        html << "<p>We apologize, but we had an issue with some of our original RSVP data. The problem is resolved now, but we need everyone to re-RSVP using a new, unique link. If you haven't RSVPed yet, no problem, please just use the link below. If you've already submitted your RSVP, please re-submit using the link below. We apologize for the inconvenience, and thank you for your patience.</p>"
+        html << "<p><a href='#{check_names_household_url(household, household.unique_hex)}'>#{check_names_household_url(household, household.unique_hex)}</a></p>"
+        html << "<p>- Kriti and Arjun</p>"
+        text = "We apologize, but we had an issue with some of our original RSVP data. The problem is resolved now, but we need everyone to re-RSVP using a new, unique link. If you haven't RSVPed yet, no problem, please just use the link below. If you've already submitted your RSVP, please re-submit using the link below. We apologize for the inconvenience, and thank you for your patience: #{check_names_household_url(household, household.unique_hex)} - Kriti and Arjun"
+        client = SendGrid::Client.new(api_key: ENV["sendgrid_api_key"])
+        mail = SendGrid::Mail.new do |m|
+          m.to = guest.email
+          m.from = 'noreply@kritiandarjun.com'
+          m.subject = "Please re-RSVP for Kriti and Arjun's wedding"
+          m.text = text
+          m.html = html
+        end
+        res = client.send(mail)
+        if res.code == 200
+          puts "    email sent to #{guest.full_name} at #{guest.email}"
+        else
+          puts "    there was an error sending to #{guest.full_name} at #{guest.email}"
+          puts res.inspect
+        end
+        sleep 1
+      else
+        puts "    no email present for #{guest.full_name}"
       end
     end
   end
