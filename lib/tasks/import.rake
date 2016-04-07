@@ -32,8 +32,8 @@ namespace :import do
         salutation: row[0].try(:strip),
         first: row[1].try(:strip),
         last: row[2].try(:strip),
-        email: row[10].try(:strip),
-        category: row[11].try(:strip),
+        email: row[9].try(:strip),
+        category: row[10].try(:strip),
         household_id: household.id
         })
       print "#{household.full_name} - #{guest.full_name}\n"
