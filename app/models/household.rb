@@ -11,7 +11,7 @@ class Household < ActiveRecord::Base
   }
 
   def name
-    last
+    last.present? ? last : first
   end
 
   def full_name
