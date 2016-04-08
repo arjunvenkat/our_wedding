@@ -4,7 +4,7 @@ class Household < ActiveRecord::Base
   has_many :rsvps, through: :guests
   default_scope { order('last ASC') }
   scope :replied, -> { where.not(replied_at: nil) }
-  scope :need_to_reply, -> { all - replied }
+  scope :need_to_reply, -> { where.not(id: nil) - replied }
   scope :by_category, -> (category) {
     household_ids = Guest.where(category: category).pluck(:household_id)
     Household.where(id: household_ids)
