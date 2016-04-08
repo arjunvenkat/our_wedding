@@ -8,7 +8,14 @@
 <p>Guests:</p>
 <ul>
   <% @household.guests.each do |guest| %>
-    <li><%= link_to guest.full_name, guest %></li>
+    <li>
+      <%= link_to guest.full_name, guest %> -
+      <% if guest.email.present? %>
+        <%= guest.email %>
+      <% else %>
+         no email present
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
@@ -31,8 +38,8 @@
 
 <p>
   <%= link_to 'View RSVP status', rsvp_status_household_path(@household.id, @household.unique_hex)  %> |
+  <%= link_to 'Edit RSVP names', check_names_household_path(@household.id, @household.unique_hex)  %> |
   <%= link_to 'Edit RSVP status', rsvp_form_household_path(@household.id, @household.unique_hex)  %>
-
 </p>
 
 <%= link_to 'Edit', edit_household_path(@household) %> |

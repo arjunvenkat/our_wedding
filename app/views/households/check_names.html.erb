@@ -4,7 +4,7 @@
       <div class="container">
         <h1>Check information for the <%= @household.name %> household</h1>
         <h4>Step 1 of 2</h4>
-        <h5 class="half-width-info">Please fix any spelling mistakes you might see and make sure at least one email address is correct. Update emails will be send to all email addresses that we have on file.</h5>
+        <h5 class="half-width-info">Please fix any spelling mistakes you might see and make sure at least one email address is correct. Update emails will be sent to all email addresses that we have on file.</h5>
         <h5><%= link_to "edit attendance", rsvp_form_household_path(@household, @household.unique_hex) %> | <%= link_to "view RSVP status", rsvp_status_household_path(@household, @household.unique_hex) %></h5>
       </div>
     </div>
