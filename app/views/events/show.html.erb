@@ -55,7 +55,7 @@
         <td><%= guest.last %></td>
         <td><%= rsvp_status(guest, @event) %></td>
         <td><%= guest.email %></td>
-        <td><%= guest.household.full_name %></td>
+        <td><%= link_to guest.household.full_name, guest.household %></td>
         <td><%= link_to 'Show', guest %></td>
         <td><%= link_to 'Edit', edit_guest_path(guest) %></td>
         <td><%= link_to 'Destroy', guest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
