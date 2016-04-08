@@ -19,6 +19,15 @@
   </div>
 </div>
 
+<h4>Filter by category</h4>
+<div class="btn-group guest-filter <%= @household_filter_class %>" role="group" aria-label="...">
+  <a href="<%= households_path %>"class="btn btn-default all">All (<%= Household.count %>)</a>
+  <a href="<%= households_path(filter: 'Kriti and Arjun') %>"class="btn btn-default kriti-and-arjun">Kriti and Arjun (<%= Household.by_category("Kriti and Arjun").count %>)</a>
+  <a href="<%= households_path(filter: 'Goel') %>"class="btn btn-default goel">Goel (<%= Household.by_category("Goel").count %>)</a>
+  <a href="<%= households_path(filter: 'Venkataswamy') %>"class="btn btn-default venkataswamy">Venkataswamy (<%= Household.by_category("Venkataswamy").count %>)</a>
+</div>
+
+
 <table class="table table-striped">
   <thead>
     <tr>

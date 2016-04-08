@@ -129,7 +129,14 @@ class HouseholdsController < ApplicationController
   # GET /households
   # GET /households.json
   def index
-    @households = Household.order(:last).page params[:page]
+    if params[:filter]
+      @households = Household.by_category(params[:filter])
+      @household_filter_class = params[:filter].parameterize
+    else
+      @households = Household.all
+      @household_filter_class = "all"
+    end
+    @households = @households.order(:last).page params[:page]
   end
 
   # GET /households/1

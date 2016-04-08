@@ -8,7 +8,7 @@
 <p>Guests:</p>
 <ul>
   <% @household.guests.each do |guest| %>
-    <li><%= guest.full_name %></li>
+    <li><%= link_to guest.full_name, guest %></li>
   <% end %>
 </ul>
 

@@ -22,6 +22,14 @@
   <strong>Email:</strong>
   <%= @guest.email %>
 </p>
+<ul>
+<% @guest.rsvps.each do |rsvp| %>
+  <li><%= rsvp.readable_status %> the <%= rsvp.event.name  %></li>
+<% end %>
+</ul>
+
+
+
 
 <%= link_to 'Edit', edit_guest_path(@guest) %> |
 <%= link_to 'Back', guests_path %>
