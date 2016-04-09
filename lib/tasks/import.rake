@@ -7,7 +7,7 @@ namespace :import do
     rehearsal_dinner = Event.find_by(name: EVENTS[:rehearsal_dinner])
     reception = Event.find_by(name: EVENTS[:reception])
 
-    CSV.foreach("#{Rails.root}/db/data/master-guest-list.csv", headers: true) do |row|
+    CSV.foreach("#{Rails.root}/db/data/new-guests.csv", headers: true) do |row|
       existing_household = Household.find_by(first: row[7].try(:strip), last: row[8].try(:strip))
       household = existing_household || Household.new({
           first: row[7].try(:strip),
