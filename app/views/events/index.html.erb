@@ -11,6 +11,7 @@
       <th>Total guests</th>
       <th>Attending</th>
       <th>Not attending</th>
+      <th>Need to reply</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,8 +23,9 @@
         <td><%= event.datetime.strftime("%A, %B #{event.datetime.day.ordinalize}") %></td>
         <td><%= event.address1 %></td>
         <td><%= event.rsvps.count %></td>
-        <td><%= event.rsvps.attending.count %></td>
-        <td><%= event.rsvps.not_attending.count %></td>
+        <td><%= event.replied_rsvps.attending.count %></td>
+        <td><%= event.replied_rsvps.not_attending.count %></td>
+        <td><%= event.unreplied_rsvps.count %></td>
         <td><%= link_to 'Show', event %></td>
         <% if current_user.super_admin? %>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>

@@ -3,7 +3,8 @@ class Guest < ActiveRecord::Base
   belongs_to :household
   acts_as_list scope: :household
   has_many :rsvps, -> { order(position: :asc) }, dependent: :destroy
-  default_scope { order('last ASC') }
+  default_scope { order('last ASC, first ASC') }
+  # scope :replied_ids, -> { where(household_id: Household.replied_ids) }
 
   def full_name
     if salutation.present?
