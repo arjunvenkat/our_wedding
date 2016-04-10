@@ -23,14 +23,34 @@
   </div>
   <div class="col-md-2">
     <div class="dashboard-item">
-      <div class="dashboard-num"><%= @event.rsvps.attending.count %></div> <div>guests are attending</div>
+      <div class="dashboard-num"><%= @event.replied_rsvps(households: Household.all).attending.count %></div> <div>guests are attending</div>
     </div>
   </div>
   <div class="col-md-2">
     <div class="dashboard-item">
-      <div class="dashboard-num"><%= @event.rsvps.not_attending.count %></div> <div>guests are not attending</div>
+      <div class="dashboard-num"><%= @event.replied_rsvps(households: Household.all).not_attending.count %></div> <div>guests are not attending</div>
     </div>
   </div>
+  <div class="col-md-2">
+    <div class="dashboard-item">
+      <div class="dashboard-num"><%= @event.unreplied_rsvps(households: Household.all).count %></div> <div>guests have not replied</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <% CATEGORIES.each do |category| %>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12">
+          <h4><%= category %></h4>
+          <div><%= @event.guests_by_category(category).count %> are invited</div>
+          <div><%= @event.replied_rsvps(households: Household.by_category(category)).attending.count %> guests are attending</div>
+          <div><%= @event.replied_rsvps(households: Household.by_category(category)).not_attending.count %> guests are not attending</div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <h2>Invited guests:</h2>

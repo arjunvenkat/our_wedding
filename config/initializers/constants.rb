@@ -4,3 +4,5 @@ EVENTS = {
   reception: "Wedding Reception",
   rehearsal_dinner: "Rehearsal Dinner"
 }
+
+CATEGORIES = [ "Kriti and Arjun", "Goel", "Venkataswamy"]

@@ -23,9 +23,9 @@
         <td><%= event.datetime.strftime("%A, %B #{event.datetime.day.ordinalize}") %></td>
         <td><%= event.address1 %></td>
         <td><%= event.rsvps.count %></td>
-        <td><%= event.replied_rsvps.attending.count %></td>
-        <td><%= event.replied_rsvps.not_attending.count %></td>
-        <td><%= event.unreplied_rsvps.count %></td>
+        <td><%= event.replied_rsvps(households: Household.all).attending.count %></td>
+        <td><%= event.replied_rsvps(households: Household.all).not_attending.count %></td>
+        <td><%= event.unreplied_rsvps(households: Household.all).count %></td>
         <td><%= link_to 'Show', event %></td>
         <% if current_user.super_admin? %>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>
