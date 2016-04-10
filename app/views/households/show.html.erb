@@ -25,11 +25,16 @@
       <h6><%= event.name %></h6>
     <ul>
       <% event.rsvps_for_household(@household).each do |rsvp| %>
-        <% if rsvp.status == 'yes'  %>
-        <li><%= rsvp.guest.full_name %> <span class="attending">is attending <i class="fa fa-check"></i></li>
+        <% if @household.replied_at != nil %>
+          <% if rsvp.status == 'yes'  %>
+          <li><%= rsvp.guest.full_name %> <span class="attending">is attending <i class="fa fa-check"></i></li>
+          <% else %>
+          <li><%= rsvp.guest.full_name %> <span class="not-attending">is not attending <i class="fa fa-ban"></i></li>
+          <% end %>
         <% else %>
-        <li><%= rsvp.guest.full_name %> <span class="not-attending">is not attending <i class="fa fa-ban"></i></li>
+          <li><%= rsvp.guest.full_name %> <span class="maybe-attending">might be attending <i class="fa fa-question"></i></li>
         <% end %>
+
       <% end %>
     </ul>
   <% end %>
