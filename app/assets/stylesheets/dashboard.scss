@@ -15,4 +15,9 @@ a.dashboard-item:hover, a.dashboard-item:focus {
   color: white;
 }
 
+.total .total, .replied .replied, .unreplied .unreplied, .attending .attending, .not-attending .not-attending {
+  background-color: gray;
+  border: 1px solid gray;
+  color: white;
+}
 

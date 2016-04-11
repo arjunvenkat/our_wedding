@@ -19,14 +19,19 @@ class EventsController < ApplicationController
     if params[:filter]
       if params[:filter] == "attending"
         event_rsvps = @event.replied_rsvps(households: Household.all).attending
+        @filter_class = "attending"
       elsif params[:filter] == "not-attending"
+        @filter_class = "not-attending"
         event_rsvps = @event.replied_rsvps(households: Household.all).not_attending
       elsif params[:filter] = "unreplied"
+        @filter_class = "unreplied"
         event_rsvps = @event.unreplied_rsvps(households: Household.all)
       else
+        @filter_class = "total"
         event_rsvps = @event.rsvps
       end
     else
+      @filter_class = "total"
       event_rsvps = @event.rsvps
     end
     @rsvps = event_rsvps.includes(:guest).order('guests.last asc').page params[:page]

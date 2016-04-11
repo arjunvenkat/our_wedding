@@ -129,11 +129,27 @@ class HouseholdsController < ApplicationController
   # GET /households
   # GET /households.json
   def index
-    if params[:filter]
-      @filtered_households = Household.by_category(params[:filter])
-      @household_filter_class = params[:filter].parameterize
+    if params[:reply_filter]
+      if params[:reply_filter] == "replied"
+        @reply_filtered_households = Household.where.not(replied_at: nil)
+        @status_filter_class = "replied"
+      elsif params[:reply_filter] == "unreplied"
+        @reply_filtered_households = Household.where(replied_at: nil)
+        @status_filter_class = "unreplied"
+      else
+        @status_filter_class = "total"
+        @reply_filtered_households = Household.all
+      end
     else
-      @filtered_households = Household.all
+      @status_filter_class = "total"
+      @reply_filtered_households = Household.all
+    end
+    if params[:household_filter]
+      @filtered_households = @reply_filtered_households.by_category(params[:household_filter])
+      @household_filtered_households = Household.by_category(params[:household_filter])
+      @household_filter_class = params[:household_filter].parameterize
+    else
+      @filtered_households = @reply_filtered_households
       @household_filter_class = "all"
     end
     @households = @filtered_households.order(:last).page params[:page]

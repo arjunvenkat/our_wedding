@@ -10,3 +10,9 @@
   display: inline-block;
   margin-left: 12px;
 }
+
+.total .total, .replied .replied, .unreplied .unreplied {
+  background-color: gray;
+  border: 1px solid gray;
+  color: white;
+}

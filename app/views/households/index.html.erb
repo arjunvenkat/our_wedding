@@ -1,35 +1,43 @@
 <p id="notice"><%= notice %></p>
-<h1>Listing Households</h1>
-<div class="row">
+<h1>Listing Households <small><%= link_to "clear filters", households_path  %></small></h1>
+<h5>Filter by status</h5>
+<div class="row <%= @status_filter_class %>">
   <div class="col-md-3">
-    <div class="dashboard-item">
+    <a href="<%= households_path %>" class="dashboard-item total">
       <div class="dashboard-num"><%= Household.all.count %></div> <div>total households</div>
-    </div>
+    </a>
   </div>
   <div class="col-md-3">
-    <div class="dashboard-item">
+    <%= link_to households_path(params.except(:action, :controller).merge(reply_filter: "replied")), class: 'dashboard-item replied' do %>
       <div class="dashboard-num"><%= Household.all.replied.count %></div> <div>have replied</div>
-    </div>
+    <% end %>
   </div>
   <div class="col-md-3">
-    <div class="dashboard-item">
+    <%= link_to households_path(params.except(:action, :controller).merge(reply_filter: "unreplied")), class: 'dashboard-item unreplied' do %>
       <div class="dashboard-num"><%= Household.all.need_to_reply.count %></div> <div>need to reply</div>
-    </div>
+    <% end %>
   </div>
 </div>
 
-<h4>Filter by category</h4>
+<h5>Filter by category</h5>
 <div class="btn-group guest-filter btn-group-filter <%= @household_filter_class %>" role="group" aria-label="...">
   <a href="<%= households_path %>"class="btn btn-default all">All (<%= Household.count %>)</a>
-  <a href="<%= households_path(filter: 'Kriti and Arjun') %>"class="btn btn-default kriti-and-arjun">Kriti and Arjun (<%= Household.by_category("Kriti and Arjun").count %>)</a>
-  <a href="<%= households_path(filter: 'Goel') %>"class="btn btn-default goel">Goel (<%= Household.by_category("Goel").count %>)</a>
-  <a href="<%= households_path(filter: 'Venkataswamy') %>"class="btn btn-default venkataswamy">Venkataswamy (<%= Household.by_category("Venkataswamy").count %>)</a>
+  <%= link_to households_path(params.except(:action, :controller).merge(household_filter: "Kriti and Arjun")), class: 'btn btn-default kriti-and-arjun' do %>
+    Kriti and Arjun (<%= Household.by_category("Kriti and Arjun").count %>)
+  <% end %>
+  <%= link_to households_path(params.except(:action, :controller).merge(household_filter: "Goel")), class: 'btn btn-default goel' do %>
+    Goel (<%= Household.by_category("Goel").count %>)
+  <% end %>
+  <%= link_to households_path(params.except(:action, :controller).merge(household_filter: "Venkataswamy")), class: 'btn btn-default venkataswamy' do %>
+    Venkataswamy (<%= Household.by_category("Venkataswamy").count %>)
+  <% end %>
 </div>
 <% if @household_filter_class != 'all' %>
-  <div class="btn-group-filter-info"><%= @filtered_households.replied.count %> replied, <%= @filtered_households.need_to_reply.count %> need to reply from <strong><%= params[:filter] %></strong></div>
+  <div class="btn-group-filter-info"><%= @household_filtered_households.replied.count %> replied, <%= @household_filtered_households.need_to_reply.count %> need to reply from <strong><%= params[:household_filter] %></strong></div>
 
 <% end %>
-
+<hr>
+<h3>Invited households:</h3>
 <table class="table table-striped">
   <thead>
     <tr>
