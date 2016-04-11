@@ -10,7 +10,7 @@
     <div class="col-md-12">
       <div class="choose-household-form">
         <h2>RSVP info</h2>
-        <p class="half-width-info">We've sent an email to at least one member of your household that contains an RSVP link. The email was sent from "noreply@kritiandarjun.com" and had a subject line that included "Kriti and Arjun's Wedding". If you haven't gotten anything yet, check your spam folder or resend the link by entering your email in the form below. Email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a> if you're still having issues.</p>
+        <p class="half-width-info left">We've sent an email to at least one member of your household that contains an RSVP link. The email was sent from "noreply@kritiandarjun.com" and had a subject line that included "Kriti and Arjun's Wedding". If you haven't gotten anything yet, check your spam folder or resend the link by entering your email in the form below. Email Arjun at <a href="mailto:avenkat2@gmail.com">avenkat2@gmail.com</a> if you're still having issues.</p>
         <%= form_tag(resend_rsvp_households_path, method: :get, class: 'form-inline') do %>
           <div class="form-group resend-rsvp-field">
             <%= text_field_tag :email, "", placeholder: 'kriti.goel@example.com', class: 'form-control home-input' %>
@@ -28,7 +28,8 @@
       <h2>Accomodations</h2>
       <%= render 'address', event: Event.find_by_name(EVENTS[:ceremony]) %>
       <p>(630) 773-4000</p>
-      <p class="half-width-info">The ceremony and reception will take place here. We have reserved a block of rooms under the name "Goel-Venkataswamy Wedding". Please make your reservation by May 15<sup>th</sup> to be included in the block rate.</p>
+      <p class="half-width-info left">The ceremony and reception will take place here. We have reserved a block of rooms under the name <strong>Goel-Venkataswamy Wedding</strong>. Please make your reservation by <strong>May 15<sup>th</sup></strong> to be included in the block rate. You may make a reservation by calling the hotel or book online using the link below:</p>
+      <h5><a href="https://www.starwoodmeeting.com/Book/GoelVenkataswamyWedding" target="_blank">https://www.starwoodmeeting.com/Book/GoelVenkataswamyWedding</a></h5>
     </div>
   </div>
 </div>
