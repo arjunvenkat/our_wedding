@@ -1,10 +1,18 @@
 .dashboard-item {
-  text-align: left;
-  // border: 1px solid lightgray;
-  padding: 12px 12px 12px 0;
+  text-align: center;
+  border: 1px solid lightgray;
+  padding: 12px;
+  color: black;
+  display: block;
   .dashboard-num {
     font-size: 3em;
   }
+}
+
+a.dashboard-item:hover, a.dashboard-item:focus {
+  text-decoration: none;
+  background-color: lightgray;
+  color: white;
 }
 
 

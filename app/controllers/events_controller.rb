@@ -16,7 +16,21 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @guests = @event.guests.order(:last).page params[:page]
+    if params[:filter]
+      if params[:filter] == "attending"
+        event_rsvps = @event.replied_rsvps(households: Household.all).attending
+      elsif params[:filter] == "not-attending"
+        event_rsvps = @event.replied_rsvps(households: Household.all).not_attending
+      elsif params[:filter] = "unreplied"
+        event_rsvps = @event.unreplied_rsvps(households: Household.all)
+      else
+        event_rsvps = @event.rsvps
+      end
+    else
+      event_rsvps = @event.rsvps
+    end
+    @rsvps = event_rsvps.includes(:guest).order('guests.last asc').page params[:page]
+    # @guests = @event.guests.order(:last).page params[:page]
   end
 
   # GET /events/new

@@ -16,25 +16,25 @@
 
 
 <div class="row">
-  <div class="col-md-2">
-    <div class="dashboard-item">
+  <div class="col-md-3">
+    <a href="<%= event_path(@event) %>" class="dashboard-item">
       <div class="dashboard-num"><%= @event.rsvps.count %></div> <div>total guests</div>
-    </div>
+    </a>
   </div>
-  <div class="col-md-2">
-    <div class="dashboard-item">
+  <div class="col-md-3">
+    <a href="<%= event_path(@event, filter: "attending") %>" class="dashboard-item">
       <div class="dashboard-num"><%= @event.replied_rsvps(households: Household.all).attending.count %></div> <div>guests are attending</div>
-    </div>
+    </a>
   </div>
-  <div class="col-md-2">
-    <div class="dashboard-item">
+  <div class="col-md-3">
+    <a href="<%= event_path(@event, filter: "not-attending") %>" class="dashboard-item">
       <div class="dashboard-num"><%= @event.replied_rsvps(households: Household.all).not_attending.count %></div> <div>guests are not attending</div>
-    </div>
+    </a>
   </div>
-  <div class="col-md-2">
-    <div class="dashboard-item">
+  <div class="col-md-3">
+    <a href="<%= event_path(@event, filter: "unreplied") %>" class="dashboard-item">
       <div class="dashboard-num"><%= @event.unreplied_rsvps(households: Household.all).count %></div> <div>guests have not replied</div>
-    </div>
+    </a>
   </div>
 </div>
 
@@ -63,27 +63,29 @@
       <th>Attending?</th>
       <th>Email</th>
       <th>Household</th>
+      <th>Category</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @guests.each do |guest| %>
+    <% @rsvps.each do |rsvp| %>
       <tr>
-        <td><%= guest.salutation %></td>
-        <td><%= guest.first %></td>
-        <td><%= guest.last %></td>
-        <td><%= rsvp_status(guest, @event) %></td>
-        <td><%= guest.email %></td>
-        <td><%= link_to guest.household.full_name, guest.household %></td>
-        <td><%= link_to 'Show', guest %></td>
-        <td><%= link_to 'Edit', edit_guest_path(guest) %></td>
-        <td><%= link_to 'Destroy', guest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= rsvp.guest.salutation %></td>
+        <td><%= rsvp.guest.first %></td>
+        <td><%= rsvp.guest.last %></td>
+        <td><%= rsvp_status(rsvp.guest, @event) %></td>
+        <td><%= rsvp.guest.email %></td>
+        <td><%= link_to rsvp.guest.household.full_name, rsvp.guest.household %></td>
+        <td><%= rsvp.guest.category %></td>
+        <td><%= link_to 'Show', rsvp.guest %></td>
+        <td><%= link_to 'Edit', edit_guest_path(rsvp.guest) %></td>
+        <td><%= link_to 'Destroy', rsvp.guest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= paginate @guests %>
+<%= paginate @rsvps %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
